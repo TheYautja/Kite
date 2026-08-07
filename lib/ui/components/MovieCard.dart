@@ -6,7 +6,7 @@ class MovieCard extends StatelessWidget
       Widget build(BuildContext context) {
         return Row(
             children: [
-                Image.asset("assets/images/placeholder.png"),
+                Image.asset("assets/images/placeholder.jpg"),
             ]
         );
       }

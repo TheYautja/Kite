@@ -1,6 +1,7 @@
 import "package:flutter/material.dart";
 import "package:kiteapp/ui/components/MovieCard.dart";
 import "components/MovieCard.dart";
+import "components/BottomNav.dart";
 
 class Homepage extends StatelessWidget
 {
@@ -12,13 +13,18 @@ class Homepage extends StatelessWidget
                 title: Text("homepage"),
             ),
             
-            body: ListView(
+            body: Column(
                 children: [
-                    MovieCard(),
-                    MovieCard(),
-                    MovieCard(),
+                    Expanded(
+                        child: ListView(
+                            children: [
+                                MovieCard(),
+                                MovieCard(),
+                            ]
+                        ),),
+                    BottomNav(),
                 ]
-            ),
+            )
         );
       }
 }
