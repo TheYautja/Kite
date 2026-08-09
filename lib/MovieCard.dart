@@ -6,7 +6,7 @@ class MovieCard extends StatelessWidget
 
     Movie movie;
 
-    MovieCard(required this.movie);
+    MovieCard({required this.movie});
 
     @override
       Widget build(BuildContext context) {

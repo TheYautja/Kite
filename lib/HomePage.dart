@@ -6,7 +6,7 @@ import "Movie.dart";
 class Homepage extends StatelessWidget
 {
 
-   Movie testInstance = Movie("testmovie", 123321, "https://picsum.photos/200"); 
+   Movie testInstance = Movie(name: "testmovie", id: "123321", imgUrl: "https://picsum.photos/200"); 
 
     @override
       Widget build(BuildContext context) {
@@ -21,9 +21,9 @@ class Homepage extends StatelessWidget
                     Expanded(
                         child: ListView(
                             children: [
-                                MovieCard(testInstance),
+                                MovieCard(movie: testInstance),
                                 SizedBox(width: 100, height: 20,),
-                                MovieCard(testInstance),
+                                MovieCard(movie : testInstance),
                             ]
                         ),),
                     BottomNav(),
