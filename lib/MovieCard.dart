@@ -6,7 +6,7 @@ class MovieCard extends StatelessWidget
 
     Movie movie;
 
-    required this.movie);
+    MovieCard(required this.movie);
 
     @override
       Widget build(BuildContext context) {
@@ -15,7 +15,7 @@ class MovieCard extends StatelessWidget
             child: Row(
                 children: [
                     ClipRRect( 
-                        child: Image.asset("assets/images/placeholder.jpg")
+                        child: Image.network(movie.imgUrl)
                     ),
                     Text(movie.name),
                     Text(movie.id),

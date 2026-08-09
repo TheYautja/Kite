@@ -6,7 +6,7 @@ import "Movie.dart";
 class Homepage extends StatelessWidget
 {
 
-   Movie testInstance = Movie("testmovie", 123321); 
+   Movie testInstance = Movie("testmovie", 123321, "https://picsum.photos/200"); 
 
     @override
       Widget build(BuildContext context) {
