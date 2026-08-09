@@ -1,9 +1,13 @@
 import "package:flutter/material.dart";
 import "MovieCard.dart";
 import "BottomNav.dart";
+import "Movie.dart";
 
 class Homepage extends StatelessWidget
 {
+
+   Movie testInstance = Movie("testmovie", 123321); 
+
     @override
       Widget build(BuildContext context) {
         return Scaffold(
@@ -17,8 +21,9 @@ class Homepage extends StatelessWidget
                     Expanded(
                         child: ListView(
                             children: [
-                                MovieCard(),
-                                MovieCard(),
+                                MovieCard(testInstance),
+                                SizedBox(width: 100, height: 20,),
+                                MovieCard(testInstance),
                             ]
                         ),),
                     BottomNav(),

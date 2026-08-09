@@ -20,6 +20,6 @@ flutter:
 
   uses-material-design: true
 
-assets:
-  - assets/images/placeholder.jpg
+  assets:
+        - assets/images/placeholder.jpg
 
