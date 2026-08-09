@@ -1,7 +1,6 @@
 import "package:flutter/material.dart";
-import "package:kiteapp/ui/components/MovieCard.dart";
-import "components/MovieCard.dart";
-import "components/BottomNav.dart";
+import "MovieCard.dart";
+import "BottomNav.dart";
 
 class Homepage extends StatelessWidget
 {

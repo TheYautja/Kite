@@ -8,6 +8,7 @@ class BottomNav extends StatelessWidget
         return Container(
             color: Colors.grey,
             child: Row(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                     IconButton(icon: Icon(Icons.home), onPressed: () {},),
                     IconButton(icon: Icon(Icons.list), onPressed: () {},),
