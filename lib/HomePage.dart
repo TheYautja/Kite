@@ -1,7 +1,9 @@
 import "package:flutter/material.dart";
+import "package:kiteapp/KiteAppbar.dart";
 import "MovieCard.dart";
 import "BottomNav.dart";
 import "Movie.dart";
+import "KiteAppbar.dart";
 
 class Homepage extends StatelessWidget
 {
@@ -12,9 +14,7 @@ class Homepage extends StatelessWidget
       Widget build(BuildContext context) {
         return Scaffold(
             
-            appBar: AppBar(
-                title: Text("homepage"),
-            ),
+            appBar: AppBar(),
             
             body: Column(
                 children: [

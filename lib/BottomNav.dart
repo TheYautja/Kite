@@ -3,6 +3,7 @@ import "package:flutter/material.dart";
 import "HomePage.dart";
 import "List.dart";
 import "Search.dart";
+import "MoviePlayer.dart";
 
 class BottomNav extends StatelessWidget
 {
@@ -21,9 +22,10 @@ class BottomNav extends StatelessWidget
                         Navigator.push(context, MaterialPageRoute(builder: (context) => MovieList()));
                     },),
                     IconButton(icon: Icon(Icons.person), onPressed: () {
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => Search()));
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => Movieplayer()));
                     },),
                 ] 
-            ),);
+            ),
+        );
       }
 }
