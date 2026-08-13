@@ -1,29 +1,37 @@
 import "package:flutter/material.dart";
 import "package:webview_flutter/webview_flutter.dart";
+import "package:flutter_linux_webview/flutter_linux_webview.dart";
 
 
 class MoviePlayer extends StatefulWidget
 {
     const MoviePlayer({super.key});
+    late WebViewController controller; 
 
     @override
-    State<MoviePlayer> createState() => _MoviePlayerState();
-}
+    State<MoviePlayer> createState() => _MoviePlayerState();}
 
 class _MoviePlayerState extends State<MoviePlayer>
 {   
     WebViewController controller = WebViewController();
 
     @override
-      initState(){
-        controller = WebViewController()
-        ..setJavaScriptMode(JavaScriptMode.unrestricted)
-        ..loadRequest(Uri.parse("https://vidsrc.to/embed/movie/tt17048514"));           
-      }
+      super.initState()
+
+    }
 
     @override
       Widget build(BuildContext context) {
-       return WebViewWidget(controller: controller);
+       return Scaffold(
+            appBar: AppBar(title: Text("test")),
+            body: WebView(
+                initialUrl: "https://vidsrc.to/embed/movie/tt17048515",
+                onWebViewCreated: (WebViewController webViewController) {
+                    controller:  
+                    JavascriptMode: JavascriptMode.unrestricted,
+                },
+            ),
+       )
       }
 }
 
