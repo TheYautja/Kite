@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
+
 class MoviePlayer extends StatefulWidget {
   const MoviePlayer({super.key});
 
@@ -8,7 +9,9 @@ class MoviePlayer extends StatefulWidget {
   State<MoviePlayer> createState() => _MoviePlayerState();
 }
 
+
 class _MoviePlayerState extends State<MoviePlayer> {
+  
   WebViewController? controller;
 
   @override
