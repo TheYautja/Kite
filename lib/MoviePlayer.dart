@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 
-class MoviePlayer extends StatefulWidget {
+class MoviePlayer extends StatefulWidget 
+{
     const MoviePlayer({super.key});
 
     @override
@@ -10,7 +11,8 @@ class MoviePlayer extends StatefulWidget {
 }
 
 
-class _MoviePlayerState extends State<MoviePlayer> {
+class _MoviePlayerState extends State<MoviePlayer> 
+{
   
     late final WebViewController controller;
 
@@ -21,14 +23,33 @@ class _MoviePlayerState extends State<MoviePlayer> {
 
         controller = WebViewController()
             ..setJavaScriptMode(JavaScriptMode.unrestricted)
-            ..loadRequest(Uri.parse("https://vidsrc.to/embed/movie/tt17048515"));
+            ..loadRequest(Uri.parse("https://vsembed.ru/embed/movie/tt17048514/"))
+            ..setNavigationDelegate
+            (
+                NavigationDelegate
+                (
+                    onNavigationRequest: (NavigationRequest request)
+                    {
+                        if(!request.url.startsWith("https://vsembed.ru/embed/movie"))
+                        {
+                            return NavigationDecision.prevent;
+                        } else 
+                        {
+                            return NavigationDecision.navigate;
+                        }
+                    }
+                )
+            );
 
     }
 
     @override
-    Widget build(BuildContext context) {
-        return Scaffold(
-            appBar: AppBar(
+    Widget build(BuildContext context) 
+    {
+        return Scaffold
+        (
+            appBar: AppBar
+            (
                 title: const Text('Test'),
             ),
             body: WebViewWidget(controller: controller),
