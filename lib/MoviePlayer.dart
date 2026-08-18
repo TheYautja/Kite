@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
+import "dart:io";
 
 
 class MoviePlayer extends StatefulWidget 
@@ -13,9 +14,9 @@ class MoviePlayer extends StatefulWidget
 
 class _MoviePlayerState extends State<MoviePlayer> 
 {
-  
+    
     late final WebViewController controller;
-
+    
     @override
     void initState()
     {
@@ -46,13 +47,21 @@ class _MoviePlayerState extends State<MoviePlayer>
     @override
     Widget build(BuildContext context) 
     {
+        double width = MediaQuery.of(context).size.width;
+        double height = MediaQuery.of(context).size.height;
+        
         return Scaffold
         (
             appBar: AppBar
             (
                 title: const Text('Test'),
             ),
-            body: WebViewWidget(controller: controller),
+            body: SizedBox
+            (
+                width: width,
+                height: height/3,
+                child: WebViewWidget(controller: controller),
+            )
         );
     }
 }
