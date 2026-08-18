@@ -22,7 +22,7 @@ class BottomNav extends StatelessWidget
                         Navigator.push(context, MaterialPageRoute(builder: (context) => MovieList()));
                     },),
                     IconButton(icon: Icon(Icons.person), onPressed: () {
-                        Navigator.push(context, MaterialPageRoute(builder: (context) => MoviePlayer()));
+                        Navigator.push(context, MaterialPageRoute(builder: (context) => Text("later")));
                     },),
                 ] 
             ),

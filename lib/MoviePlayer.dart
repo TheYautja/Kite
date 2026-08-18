@@ -1,12 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 import "dart:io";
+import "Movie.dart";
 
 
 class MoviePlayer extends StatefulWidget 
-{
-    const MoviePlayer({super.key});
+{   
 
+    final Movie movie;
+
+    const MoviePlayer({super.key, required this.movie});
+    
     @override
     State<MoviePlayer> createState() => _MoviePlayerState();
 }
