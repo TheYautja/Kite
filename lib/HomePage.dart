@@ -51,7 +51,7 @@ class Homepage extends StatelessWidget
                             {
                                 return MovieCard
                                 (
-                                    movie: movieList[index.movie],
+                                    movie: movieList[index],
                                 );
                             }
                         );
