@@ -19,7 +19,7 @@ class Homepage extends StatelessWidget
             appBar: AppBar(title: Text("homepage"),),
             body: FutureBuilder
                 (
-                    future: null,
+                    future: PageData(),
                     builder: (context, snapshot)
                     {
                         if(snapshot.connectionState == ConnectionState.waiting)

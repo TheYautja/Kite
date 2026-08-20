@@ -1,10 +1,64 @@
 
 class Movie {
     
-    String name;
     String id;
+    String name;
     String imgUrl;
+    Genre genre;
+    String date;
+    int rating;
+    String description;
+
     
-    Movie({required this.name, required this.id, required this.imgUrl});
+    Movie
+    ({
+        required this.id,
+        required this.name,
+        required this.date,
+        required this.genre,
+        required this.rating,
+        required this.imgUrl,
+        required this.description
+    });
+
+
+    factory Movie.fromJson(Map<String, dynamic> json)
+    {
+        return Movie
+        (
+            id: json['imdb_id'],
+            name: json['title'],
+            imgUrl: json['poster_path'],
+            genre: Genre.fromJson(json['genre']),
+            date: json['release_date'],
+            rating: json['vote_average'],
+            description: json['overview'],
+        );
+    }
+
+}
+
+
+class Genre
+{
+    final int id;
+    final String name;
+
+
+    Genre
+    ({
+        required this.id,
+        required this.name,
+    });
+
+
+    factory Genre.fromJson(Map<String, dynamic> json)
+    {
+        return Genre
+        (
+            id: json['id'],
+            name: json['name'],
+        );
+    }
 
 }
