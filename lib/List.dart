@@ -1,8 +1,6 @@
 import "package:flutter/material.dart";
-import "package:kiteapp/KiteAppbar.dart";
 import "MovieCard.dart";
 import "Movie.dart";
-import "KiteAppbar.dart";
 
 class MovieList extends StatelessWidget
 {

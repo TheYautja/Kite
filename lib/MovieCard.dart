@@ -16,19 +16,40 @@ class MovieCard extends StatelessWidget
         return Container
         (
             color: Color(0xFFa4dbd7),
-            child: GestureDetector
+            child: Row
             (
-                onTap: () {Navigator.push(context, MaterialPageRoute(builder: (context) =>  MoviePlayer(movie: movie)));},
-                child: Row
-                (
-                    children: 
-                    [
-                        ClipRRect(child: Image.network(movie.imgUrl)),
-                        Text(movie.name),
-                        Text(movie.id),
-                    ]
-                )
-            ) 
-        );
+                children: 
+                [
+                    ClipRRect(child: Image.network(movie.imgUrl)),
+                    Column
+                    (
+                        children: 
+                        [
+                            Text(movie.name),
+                            //Text(movie.date),
+                            //Text(movie.genre),
+                            //Text(movie.rating),
+                            //Text(movie.description),
+                        ],
+                    ),
+                    Column
+                    (
+                        children:
+                        [
+                            IconButton
+                            (
+                                onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context) => MoviePlayer(movie: movie)));}, 
+                                icon: Icon(Icons.play_arrow),
+                            ),
+                            IconButton
+                            (
+                                onPressed: (){},
+                                icon: Icon(Icons.add_circle),
+                            ),
+                        ],
+                    ),
+                ]
+            )
+        ); 
       }
 }
