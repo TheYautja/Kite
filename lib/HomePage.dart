@@ -1,4 +1,6 @@
 import "package:flutter/material.dart";
+import "package:http/http.dart" as http;
+import "dart:convert";
 import "MovieCard.dart";
 import "BottomNav.dart";
 import "Movie.dart";
@@ -7,9 +9,12 @@ import "Movie.dart";
 class Homepage extends StatelessWidget
 {
 
-   Movie testInstance = Movie(name: "testmovie", id: "123321", imgUrl: "https://picsum.photos/200"); 
+    Future<List<Movie>> PageData() async
+    {
+        final response = await http.get(Uri.parse("later.com"));
 
-    //Future<List<Movie>> PageData(){}
+        return MovieResponse.fromJson(json.decode(response.body)).response;
+    }
 
     @override
       Widget build(BuildContext context) 
@@ -49,7 +54,7 @@ class Homepage extends StatelessWidget
                                     movie: movieList[index.movie],
                                 );
                             }
-                        )
+                        );
 
                     }
                 )

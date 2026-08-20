@@ -39,6 +39,33 @@ class Movie {
 }
 
 
+class MovieResponse
+{
+    final List<Movie> response;
+
+    MovieResponse
+    ({
+        required this.response,
+    }); 
+
+   
+    factory MovieResponse.fromJson(Map<String, dynamic> json)
+    {
+        return MovieResponse
+        (
+            response: List<Movie>.from
+            (
+                json['results'].map
+                (
+                    (x) => Movie.fromJson(x),
+                )
+            )
+        );
+    }
+
+}
+
+
 class Genre
 {
     final int id;
