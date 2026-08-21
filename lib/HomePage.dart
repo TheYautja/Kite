@@ -1,5 +1,6 @@
 import "package:flutter/material.dart";
 import "package:http/http.dart" as http;
+import "package:flutter_dotenv/flutter_dotenv.dart";
 import "dart:convert";
 import "MovieCard.dart";
 import "BottomNav.dart";
@@ -11,7 +12,14 @@ class Homepage extends StatelessWidget
 
     Future<List<Movie>> PageData() async
     {
-        final response = await http.get(Uri.parse("later.com"));
+        final url = Uri.parse("https://");
+        final key = dotenv.env['ACCESS_TOKEN'];
+
+        final response = await http.get
+        (
+            url, 
+            headers: {'Authorization': 'Bearer: $key',}
+        );
 
         return MovieResponse.fromJson(json.decode(response.body)).response;
     }
