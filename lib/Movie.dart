@@ -1,12 +1,12 @@
 
 class Movie {
     
-    String id;
+    int id;
     String name;
     String imgUrl;
-    Genre genre;
+    List<int> genre;
     String date;
-    int rating;
+    double rating;
     String description;
 
     
@@ -26,12 +26,12 @@ class Movie {
     {
         return Movie
         (
-            id: json['imdb_id'],
+            id: json['id'],
             name: json['title'],
             imgUrl: json['poster_path'],
-            genre: Genre.fromJson(json['genre']),
+            genre: List<int>.from(json['genre_ids']),
             date: json['release_date'],
-            rating: json['vote_average'],
+            rating: json['vote_average'].toDouble(),
             description: json['overview'],
         );
     }
@@ -55,7 +55,7 @@ class MovieResponse
         (
             response: List<Movie>.from
             (
-                json['results'].map
+                (json['results'] ?? []).map
                 (
                     (x) => Movie.fromJson(x),
                 )
@@ -66,26 +66,3 @@ class MovieResponse
 }
 
 
-class Genre
-{
-    final int id;
-    final String name;
-
-
-    Genre
-    ({
-        required this.id,
-        required this.name,
-    });
-
-
-    factory Genre.fromJson(Map<String, dynamic> json)
-    {
-        return Genre
-        (
-            id: json['id'],
-            name: json['name'],
-        );
-    }
-
-}

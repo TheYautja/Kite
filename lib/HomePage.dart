@@ -14,13 +14,13 @@ class Homepage extends StatelessWidget
     {
 
         await dotenv.load();
-        final url = Uri.parse("https://api.themoviedb.org/3/movie/11");
+        final url = Uri.parse("https://api.themoviedb.org/3/movie/popular");
         final key = dotenv.get('ACCESS_TOKEN');
 
         final response = await http.get
         (
             url, 
-            headers: {'Authorization': 'Bearer $key',}
+            headers: {'Authorization': 'Bearer $key', 'Accept': 'application/json',}
         );
         
         if(response.statusCode == 200)
@@ -43,7 +43,7 @@ class Homepage extends StatelessWidget
                 (
                     future: PageData(),
                     builder: (context, snapshot)
-                    {
+                    {   
                         if(snapshot.connectionState == ConnectionState.waiting)
                         {
                             return Center
@@ -59,6 +59,8 @@ class Homepage extends StatelessWidget
                             );
                         }
                         
+                        if(!snapshot.hasData){return Text("Empty snapshot");}
+
                         List<Movie> movieList = snapshot.data!;
 
                         return ListView.builder

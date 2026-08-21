@@ -20,7 +20,12 @@ class MovieCard extends StatelessWidget
             (
                 children: 
                 [
-                    ClipRRect(child: Image.network(movie.imgUrl)),
+                    Container
+                    (
+                        width: 120.0,
+                        height: 180.0,
+                        child: Image.network("https://image.tmdb.org/t/p/w500${movie.imgUrl}")
+                    ),
                     Column
                     (
                         children: 
