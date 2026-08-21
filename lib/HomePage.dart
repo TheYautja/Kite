@@ -12,16 +12,25 @@ class Homepage extends StatelessWidget
 
     Future<List<Movie>> PageData() async
     {
-        final url = Uri.parse("https://");
-        final key = dotenv.env['ACCESS_TOKEN'];
+
+        await dotenv.load();
+        final url = Uri.parse("https://api.themoviedb.org/3/movie/11");
+        final key = dotenv.get('ACCESS_TOKEN');
 
         final response = await http.get
         (
             url, 
-            headers: {'Authorization': 'Bearer: $key',}
+            headers: {'Authorization': 'Bearer $key',}
         );
-
-        return MovieResponse.fromJson(json.decode(response.body)).response;
+        
+        if(response.statusCode == 200)
+        {
+            return MovieResponse.fromJson(json.decode(response.body)).response;
+        }
+        else 
+        {
+            throw Exception("Error: ${response.statusCode}");
+        }
     }
 
     @override
