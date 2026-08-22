@@ -1,7 +1,7 @@
 import "package:flutter/material.dart";
 import "package:kiteapp/MoviePlayer.dart";
 import "Movie.dart";
-import "MoviePlayer.dart";
+
 
 class MovieCard extends StatelessWidget
 {
@@ -11,50 +11,29 @@ class MovieCard extends StatelessWidget
     MovieCard({required this.movie});
 
     @override
-      Widget build(BuildContext context)
-      {
-        return Container
+    Widget build(BuildContext context)
+    {
+        return Card
         (
-            color: Color(0xFFa4dbd7),
-            child: Row
+            child: Column
             (
                 children: 
                 [
-                    Container
+                    ListTile
                     (
-                        width: 120.0,
-                        height: 180.0,
-                        child: Image.network("https://image.tmdb.org/t/p/w500${movie.imgUrl}")
-                    ),
-                    Column
-                    (
-                        children: 
-                        [
-                            Text(movie.name),
-                            //Text(movie.date),
-                            //Text(movie.genre),
-                            //Text(movie.rating),
-                            //Text(movie.description),
-                        ],
-                    ),
-                    Column
-                    (
-                        children:
-                        [
-                            IconButton
+                        leading: CircleAvatar
+                        (
+                            backgroundImage: NetworkImage
                             (
-                                onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (context) => MoviePlayer(movie: movie)));}, 
-                                icon: Icon(Icons.play_arrow),
+                                "https://image.tmdb.org/t/p/w500${movie.imgUrl}"
                             ),
-                            IconButton
-                            (
-                                onPressed: (){},
-                                icon: Icon(Icons.add_circle),
-                            ),
-                        ],
+                        ),
+                        title: Text(movie.name),
+                        subtitle: Text(movie.rating.toString()),
+                        trailing: Text(movie.date),
                     ),
-                ]
+                ],
             )
-        ); 
-      }
+        );
+    }
 }
