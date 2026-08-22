@@ -63,8 +63,15 @@ class Homepage extends StatelessWidget
 
                         List<Movie> movieList = snapshot.data!;
 
-                        return ListView.builder
+                        return GridView.builder
                         (
+                            gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent
+                            (
+                                maxCrossAxisExtent: 200,
+                                childAspectRatio: 3/2,
+                                crossAxisSpacing: 20,
+                                mainAxisSpacing: 20,
+                            ),
                             itemCount: movieList.length,
                             itemBuilder: (context, index)
                             {

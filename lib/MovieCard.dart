@@ -13,27 +13,23 @@ class MovieCard extends StatelessWidget
     @override
     Widget build(BuildContext context)
     {
-        return Card
+
+        Size size = MediaQuery.of(context).size;
+
+        return SizedBox
         (
-            child: Column
+            width: size.width/3,
+            height: size.height/3,
+            child: Stack
             (
                 children: 
                 [
-                    ListTile
-                    (
-                        leading: CircleAvatar
-                        (
-                            backgroundImage: NetworkImage
-                            (
-                                "https://image.tmdb.org/t/p/w500${movie.imgUrl}"
-                            ),
-                        ),
-                        title: Text(movie.name),
-                        subtitle: Text(movie.rating.toString()),
-                        trailing: Text(movie.date),
-                    ),
+                    Image.network("https://image.tmdb.org/t/p/w500${movie.imgUrl}"),
+
                 ],
-            )
+            ),
         );
     }
 }
+
+//"https://image.tmdb.org/t/p/w500${movie.imgUrl}"
