@@ -12,29 +12,6 @@ class Homepage extends StatelessWidget
 
     API api = new API();
 
-    Future<List<Movie>> PageData() async
-    {
-
-        await dotenv.load();
-        final url = Uri.parse("https://api.themoviedb.org/3/movie/popular");
-        final key = dotenv.get('ACCESS_TOKEN');
-
-        final response = await http.get
-        (
-            url, 
-            headers: {'Authorization': 'Bearer $key', 'Accept': 'application/json',}
-        );
-        
-        if(response.statusCode == 200)
-        {
-            return MovieResponse.fromJson(json.decode(response.body)).response;
-        }
-        else 
-        {
-            throw Exception("Error: ${response.statusCode}");
-        }
-    }
-
     @override
       Widget build(BuildContext context) 
       {
@@ -67,12 +44,13 @@ class Homepage extends StatelessWidget
 
                         return GridView.builder
                         (
-                            gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent
+                            padding: const EdgeInsets.all(8),
+                            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount
                             (
-                                maxCrossAxisExtent: 200,
-                                childAspectRatio: 1,
-                                crossAxisSpacing: 6,
-                                mainAxisSpacing: 1,
+                                crossAxisCount: 2,
+                                crossAxisSpacing: 8,
+                                mainAxisSpacing: 8,
+                                childAspectRatio: 0.65
                             ),
                             itemCount: movieList.length,
                             itemBuilder: (context, index)

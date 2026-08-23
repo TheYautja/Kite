@@ -28,7 +28,7 @@ class Movie {
         (
             id: json['id'],
             name: json['title'],
-            imgUrl: json['poster_path'],
+            imgUrl: "https://tmdb.org/t/p/w500" + json['poster_path'],
             genre: List<int>.from(json['genre_ids']),
             date: json['release_date'],
             rating: json['vote_average'].toDouble(),
