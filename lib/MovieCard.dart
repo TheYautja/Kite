@@ -16,15 +16,20 @@ class MovieCard extends StatelessWidget
 
         Size size = MediaQuery.of(context).size;
 
-        return SizedBox
+        return Container
         (
-            width: size.width/3,
-            height: size.height/3,
+            width: size.width,
+            height: size.height,
+            alignment: Alignment.center,
             child: Stack
             (
                 children: 
                 [
-                    Image.network("https://image.tmdb.org/t/p/w500${movie.imgUrl}"),
+                    FittedBox
+                    (
+                        fit: BoxFit.fill,
+                        child: Image.network("https://image.tmdb.org/t/p/w500${movie.imgUrl}"),
+                    ),
 
                 ],
             ),

@@ -5,10 +5,12 @@ import "dart:convert";
 import "MovieCard.dart";
 import "BottomNav.dart";
 import "Movie.dart";
-
+import "API.dart";
 
 class Homepage extends StatelessWidget
 {
+
+    API api = new API();
 
     Future<List<Movie>> PageData() async
     {
@@ -41,7 +43,7 @@ class Homepage extends StatelessWidget
             appBar: AppBar(title: Text("homepage"),),
             body: FutureBuilder
                 (
-                    future: PageData(),
+                    future: api.getMovies("top_rated"),
                     builder: (context, snapshot)
                     {   
                         if(snapshot.connectionState == ConnectionState.waiting)
@@ -68,9 +70,9 @@ class Homepage extends StatelessWidget
                             gridDelegate: SliverGridDelegateWithMaxCrossAxisExtent
                             (
                                 maxCrossAxisExtent: 200,
-                                childAspectRatio: 3/2,
-                                crossAxisSpacing: 20,
-                                mainAxisSpacing: 20,
+                                childAspectRatio: 1,
+                                crossAxisSpacing: 6,
+                                mainAxisSpacing: 1,
                             ),
                             itemCount: movieList.length,
                             itemBuilder: (context, index)
