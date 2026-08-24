@@ -24,7 +24,7 @@ class MovieCard extends StatelessWidget
                 [
                     Expanded 
                     (
-                        flex: 7,
+                        flex: 6,
                         child: Image.network
                         (
                             movie.imgUrl,
@@ -42,7 +42,7 @@ class MovieCard extends StatelessWidget
                     ),
                     Expanded
                     (
-                        flex: 3,
+                        flex: 4,
                         child: Padding
                         (
                             padding: const EdgeInsets.all(8),

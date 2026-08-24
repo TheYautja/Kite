@@ -54,8 +54,6 @@ class _MoviePlayerState extends State<MoviePlayer>
     @override
     Widget build(BuildContext context) 
     {
-        double width = MediaQuery.of(context).size.width;
-        double height = MediaQuery.of(context).size.height;
         
         return Scaffold
         (
@@ -63,12 +61,40 @@ class _MoviePlayerState extends State<MoviePlayer>
             (
                 title: const Text('Test'),
             ),
-            body: SizedBox
+            body: Column
             (
-                width: width,
-                height: height/3,
-                child: WebViewWidget(controller: controller),
-            )
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: 
+                [
+                    Expanded
+                    (   
+                        flex: 3,
+                        child: WebViewWidget(controller: controller),
+                    ),
+                    Expanded
+                    (
+                        flex: 7,
+                        child: Column
+                        (
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: 
+                            [
+                                Row
+                                (
+                                    children: 
+                                    [
+                                        Text(widget.movie.name),
+                                        Text(widget.movie.date.toString()),
+                                        Text(widget.movie.rating.toString()),
+                                    ],
+                                ),
+                                Text(widget.movie.description)
+                            ],
+                        ),
+                    ),
+                ],
+            ),
+
         );
     }
 }
