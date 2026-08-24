@@ -65,7 +65,14 @@ class MovieCard extends StatelessWidget
                                     (
                                         children: 
                                         [
-                                            IconButton(onPressed: (){}, icon: Icon(Icons.play_circle), color: Colors.amber,),
+                                            IconButton
+                                            (
+                                                onPressed: (){
+                                                    Navigator.push(context, MaterialPageRoute(builder: (context) => MoviePlayer(movie: movie,)));
+                                                },
+                                                icon: Icon(Icons.play_circle),
+                                                color: Colors.amber,
+                                            ),
                                             const SizedBox(width: 4),
                                             Text
                                             (

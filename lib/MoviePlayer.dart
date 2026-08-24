@@ -24,11 +24,14 @@ class _MoviePlayerState extends State<MoviePlayer>
     @override
     void initState()
     {
+
+        String tmdbId = widget.movie.id.toString();
+
         super.initState();
 
         controller = WebViewController()
             ..setJavaScriptMode(JavaScriptMode.unrestricted)
-            ..loadRequest(Uri.parse("https://vsembed.ru/embed/movie/tt17048514/"))
+            ..loadRequest(Uri.parse("https://vsembed.ru/embed/movie/${tmdbId}/"))
             ..setNavigationDelegate
             (
                 NavigationDelegate
