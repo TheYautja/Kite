@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:kiteapp/BottomNav.dart';
+import "package:kiteapp/Rating.dart";
 import 'package:webview_flutter/webview_flutter.dart';
 import "dart:io";
 import "Movie.dart";
@@ -59,7 +61,7 @@ class _MoviePlayerState extends State<MoviePlayer>
         (
             appBar: AppBar
             (
-                title: const Text('Test'),
+                title: const Text('Watch'),
             ),
             body: Column
             (
@@ -74,27 +76,26 @@ class _MoviePlayerState extends State<MoviePlayer>
                     Expanded
                     (
                         flex: 7,
-                        child: Column
+                        child: Padding
                         (
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: 
-                            [
-                                Row
-                                (
-                                    children: 
-                                    [
-                                        Text(widget.movie.name),
-                                        Text(widget.movie.date.toString()),
-                                        Text(widget.movie.rating.toString()),
-                                    ],
-                                ),
-                                Text(widget.movie.description)
-                            ],
+                            padding: EdgeInsets.all(10),
+                            child: Column
+                            (
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: 
+                                [
+                                    Text(widget.movie.name, style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22)),
+                                    Text(widget.movie.date.toString(), style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
+                                    Rating(rating: widget.movie.rating),
+                                    Text(widget.movie.description),
+                                    Spacer(),
+                                ],
+                            ),
                         ),
                     ),
                 ],
             ),
-
+            bottomSheet: BottomNav(),
         );
     }
 }

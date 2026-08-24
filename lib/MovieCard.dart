@@ -1,4 +1,5 @@
 import "package:flutter/material.dart";
+import "package:kiteapp/Common.dart";
 import "package:kiteapp/MoviePlayer.dart";
 import "Movie.dart";
 
@@ -16,6 +17,7 @@ class MovieCard extends StatelessWidget
  
         return Card
         (
+            color: kiteBack,
             clipBehavior: Clip.antiAlias,
             child: Column
             (

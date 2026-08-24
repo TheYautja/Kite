@@ -63,7 +63,8 @@ class Homepage extends StatelessWidget
                         );
 
                     }
-                )
+                ),
+                bottomSheet: BottomNav(),
     
         );
       }
