@@ -1,11 +1,9 @@
 import "package:flutter/material.dart";
-import "package:http/http.dart" as http;
-import "package:flutter_dotenv/flutter_dotenv.dart";
-import "dart:convert";
 import "MovieCard.dart";
 import "BottomNav.dart";
 import "Movie.dart";
 import "API.dart";
+import "package:kiteapp/SearchPage.dart";
 
 class Homepage extends StatelessWidget
 {
@@ -16,8 +14,26 @@ class Homepage extends StatelessWidget
       Widget build(BuildContext context) 
       {
         return Scaffold
-        (      
-            appBar: AppBar(title: Text("homepage"),),
+        (   
+
+
+            appBar: AppBar
+            (
+                title: Text("Kite"),
+                actions: 
+                [
+                    IconButton
+                    (
+                        onPressed: () => Navigator.of(context).push
+                        (
+                            MaterialPageRoute(builder: (_) => SearchPage())
+                        ),
+                        icon: Icon(Icons.search)
+                    )
+                ],
+            ),
+
+
             body: FutureBuilder
                 (
                     future: api.getMovies("top_rated"),
@@ -39,8 +55,9 @@ class Homepage extends StatelessWidget
                         }
                         
                         if(!snapshot.hasData){return Text("Empty snapshot");}
-
                         List<Movie> movieList = snapshot.data!;
+
+
 
                         return GridView.builder
                         (
@@ -58,12 +75,15 @@ class Homepage extends StatelessWidget
                                 return MovieCard
                                 (
                                     movie: movieList[index],
-                                );
-                            }
+                                );                            }
                         );
+
+
 
                     }
                 ),
+
+
                 bottomSheet: BottomNav(),
     
         );

@@ -14,12 +14,15 @@ class Rating extends StatelessWidget
     @override
     Widget build(BuildContext context) 
     {
+
+        final String rStr = rating.toStringAsFixed(1);
+
         return Row
         (
             children:
             [
                 Icon(Icons.star, color: kiteAmber,),
-                Text(rating.toString().substring(2), style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
+                Text(rStr, style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
             ],
         );
     }

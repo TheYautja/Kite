@@ -1,6 +1,7 @@
 import "package:flutter/material.dart";
 import "package:kiteapp/Common.dart";
 import "package:kiteapp/MoviePlayer.dart";
+import "package:kiteapp/Rating.dart";
 import "Movie.dart";
 
 
@@ -75,12 +76,8 @@ class MovieCard extends StatelessWidget
                                                 icon: Icon(Icons.play_circle),
                                                 color: Colors.amber,
                                             ),
-                                            const SizedBox(width: 4),
-                                            Text
-                                            (
-                                                movie.rating.toString(), 
-                                                style: TextStyle(fontWeight: FontWeight.bold),
-                                            )
+                                            Spacer(),
+                                            Rating(rating: movie.rating),
                                         ],
                                     ),
 

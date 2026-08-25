@@ -6,7 +6,7 @@ Future<void> main() async {
 
     WidgetsFlutterBinding.ensureInitialized();
     await dotenv.load();
-    runApp(MaterialApp(home: Homepage(),));
+    runApp(MaterialApp(debugShowCheckedModeBanner: false, home: Homepage(),));
 
 }
 

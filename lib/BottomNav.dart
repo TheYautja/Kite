@@ -3,8 +3,6 @@ import "package:flutter/material.dart";
 import "package:kiteapp/Common.dart";
 import "HomePage.dart";
 import "List.dart";
-import "Search.dart";
-import "MoviePlayer.dart";
 
 class BottomNav extends StatelessWidget
 {
