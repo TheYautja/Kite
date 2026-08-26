@@ -1,4 +1,5 @@
 import "package:flutter/material.dart";
+import "package:kiteapp/TmdbSearch.dart";
 import "MovieCard.dart";
 import "BottomNav.dart";
 import "Movie.dart";
@@ -26,7 +27,7 @@ class Homepage extends StatelessWidget
                     (
                         onPressed: () => Navigator.of(context).push
                         (
-                            MaterialPageRoute(builder: (_) => SearchPage())
+                            MaterialPageRoute(builder: (_) => TmdbSearchBar())
                         ),
                         icon: Icon(Icons.search)
                     )
