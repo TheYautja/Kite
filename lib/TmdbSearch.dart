@@ -40,7 +40,13 @@ class _TmdbSearchPageState extends State<TmdbSearchPage> {
 
                     List<Movie> movieList = snapshot.data!;
                     
-                    return ListView.builder(
+                    return GridView.builder(
+                        padding: const EdgeInsets.all(8),
+                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 2,
+                            mainAxisSpacing: 8,
+                            crossAxisSpacing: 8,
+                        ),
                         itemCount: movieList.length,
                         itemBuilder: (context, index){
                             return MovieCard(movie: movieList[index]);
