@@ -1,68 +1,45 @@
-
 class Movie {
-    
-    int id;
-    String name;
-    String imgUrl;
-    List<int> genre;
-    String date;
-    double rating;
-    String description;
+  int id;
+  String name;
+  String imgUrl;
+  List<int> genre;
+  String date;
+  double rating;
+  String description;
 
-    
-    Movie
-    ({
-        required this.id,
-        required this.name,
-        required this.date,
-        required this.genre,
-        required this.rating,
-        required this.imgUrl,
-        required this.description
-    });
+  Movie({
+    required this.id,
+    required this.name,
+    required this.date,
+    required this.genre,
+    required this.rating,
+    required this.imgUrl,
+    required this.description,
+  });
 
-
-    factory Movie.fromJson(Map<String, dynamic> json)
-    {
-        return Movie
-        (
-            id: json['id'],
-            name: json['title'],
-            imgUrl: "https://tmdb.org/t/p/w500" + json['poster_path'],
-            genre: List<int>.from(json['genre_ids']),
-            date: json['release_date'],
-            rating: json['vote_average'].toDouble(),
-            description: json['overview'],
-        );
-    }
-
+  factory Movie.fromJson(Map<String, dynamic> json) {
+    return Movie(
+      id: json['id'],
+      name: json['title'],
+      imgUrl: "https://tmdb.org/t/p/w500" + json['poster_path'],
+      genre: List<int>.from(json['genre_ids']),
+      date: json['release_date'],
+      rating: json['vote_average'].toDouble(),
+      description: json['overview'],
+    );
+  }
 }
 
+class MovieResponse {
+  final List<Movie> response;
 
-class MovieResponse
-{
-    final List<Movie> response;
+  MovieResponse({required this.response});
 
-    MovieResponse
-    ({
-        required this.response,
-    }); 
-
-   
-    factory MovieResponse.fromJson(Map<String, dynamic> json)
-    {
-        return MovieResponse
-        (
-            response: List<Movie>.from
-            (
-                (json['results'] ?? []).map
-                (
-                    (x) => Movie.fromJson(x),
-                )
-            )
-        );
-    }
-
+  factory MovieResponse.fromJson(Map<String, dynamic> json) {
+    return MovieResponse(
+      response: List<Movie>.from(
+        (json['results'] ?? []).map((x) => Movie.fromJson(x)),
+      ),
+    );
+  }
 }
-
-

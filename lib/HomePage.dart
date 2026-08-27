@@ -4,89 +4,62 @@ import "MovieCard.dart";
 import "BottomNav.dart";
 import "Movie.dart";
 import "API.dart";
-import "package:kiteapp/SearchPage.dart";
 
-class Homepage extends StatelessWidget
-{
+class Homepage extends StatefulWidget {
+  @override
+  State<Homepage> createState() => _HomepageState();
+}
 
-    API api = new API();
+class _HomepageState extends State<Homepage> {
+  API api = new API();
 
-    @override
-      Widget build(BuildContext context) 
-      {
-        return Scaffold
-        (   
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("Kite"),
+        actions: [
+          IconButton(
+            onPressed: () => Navigator.of(
+              context,
+            ).push(MaterialPageRoute(builder: (_) => TmdbSearchPage())),
+            icon: Icon(Icons.search),
+          ),
+        ],
+      ),
 
+      body: FutureBuilder(
+        future: api.getMovies("top_rated"),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return Center(child: CircularProgressIndicator());
+          }
+          if (snapshot.hasError) {
+            return Center(child: Text("Error: ${snapshot.error}"));
+          }
 
-            appBar: AppBar
-            (
-                title: Text("Kite"),
-                actions: 
-                [
-                    IconButton
-                    (
-                        onPressed: () => Navigator.of(context).push
-                        (
-                            MaterialPageRoute(builder: (_) => TmdbSearchBar())
-                        ),
-                        icon: Icon(Icons.search)
-                    )
-                ],
+          if (!snapshot.hasData) {
+            return Text("Empty snapshot");
+          }
+          List<Movie> movieList = snapshot.data!;
+
+          return GridView.builder(
+            padding: const EdgeInsets.all(8),
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+              crossAxisSpacing: 8,
+              mainAxisSpacing: 8,
+              childAspectRatio: 0.65,
             ),
+            itemCount: movieList.length,
+            itemBuilder: (context, index) {
+              return MovieCard(movie: movieList[index]);
+            },
+          );
+        },
+      ),
 
-
-            body: FutureBuilder
-                (
-                    future: api.getMovies("top_rated"),
-                    builder: (context, snapshot)
-                    {   
-                        if(snapshot.connectionState == ConnectionState.waiting)
-                        {
-                            return Center
-                            (
-                                child: CircularProgressIndicator(),
-                            );
-                        }
-                        if(snapshot.hasError)
-                        {
-                            return Center
-                            (
-                                child: Text("Error: ${snapshot.error}"),
-                            );
-                        }
-                        
-                        if(!snapshot.hasData){return Text("Empty snapshot");}
-                        List<Movie> movieList = snapshot.data!;
-
-
-
-                        return GridView.builder
-                        (
-                            padding: const EdgeInsets.all(8),
-                            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount
-                            (
-                                crossAxisCount: 2,
-                                crossAxisSpacing: 8,
-                                mainAxisSpacing: 8,
-                                childAspectRatio: 0.65
-                            ),
-                            itemCount: movieList.length,
-                            itemBuilder: (context, index)
-                            {
-                                return MovieCard
-                                (
-                                    movie: movieList[index],
-                                );                            }
-                        );
-
-
-
-                    }
-                ),
-
-
-                bottomSheet: BottomNav(),
-    
-        );
-      }
+      bottomSheet: BottomNav(),
+    );
+  }
 }
