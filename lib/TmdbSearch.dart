@@ -26,7 +26,7 @@ class _TmdbSearchPageState extends State<TmdbSearchPage> {
                 ),
             ),
             body: FutureBuilder(
-                future: api.getMovies("top_rated"),
+                future: api.searchByName("Avatar"),
                 builder: (context, snapshot){
                     if(snapshot.connectionState == ConnectionState.waiting){
                         return CircularProgressIndicator();
@@ -35,7 +35,7 @@ class _TmdbSearchPageState extends State<TmdbSearchPage> {
                         return Text("connection failed");
                     }
                     if(!snapshot.hasData){
-                        return Text("empty snapshot");
+                        return Center(child: Text("No results found"));
                     }
 
                     List<Movie> movieList = snapshot.data!;
