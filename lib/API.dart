@@ -35,7 +35,7 @@ class API {
 
 
     Future<List<Movie>> searchByName(String name) async {
-        String url = "https://api.themoviedb.org/3/search/movie?query=${name}";
+        String url = "https://api.themoviedb.org/3/search/movie?query=${parseInput(name)}";
         final response = await http.get(
             Uri.parse(url),
             headers: {
@@ -50,6 +50,11 @@ class API {
             throw Exception("${response.statusCode}");
         }
 
+    }
+
+
+    String parseInput(String input){
+        return input.trim().replaceAll(" ", "+");
     }
 
 }

@@ -26,7 +26,7 @@ class _TmdbSearchPageState extends State<TmdbSearchPage> {
                 ),
             ),
             body: FutureBuilder(
-                future: api.searchByName("Avatar"),
+                future: api.searchByName("Jack the giant"),
                 builder: (context, snapshot){
                     if(snapshot.connectionState == ConnectionState.waiting){
                         return CircularProgressIndicator();
