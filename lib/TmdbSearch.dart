@@ -13,20 +13,38 @@ class TmdbSearchPage extends StatefulWidget {
 class _TmdbSearchPageState extends State<TmdbSearchPage> {
 
     final api = API();
+    final TextEditingController _searchController = TextEditingController();
+    late Future<List<Movie>> results;
+
+
+    @override
+      void initState() {
+        super.initState();
+        results = api.getMovies("upcoming");
+      }
+
 
     @override
     Widget build(BuildContext context) {
+
         return Scaffold(
             appBar: AppBar(
                 title: TextField(
+                    controller: _searchController,
+                    onSubmitted: (String text){
+                        setState(() {
+                            results = api.searchByName(text);
+                        });                       
+                    }, 
                     decoration: InputDecoration(
                         border: OutlineInputBorder(),
                         hintText: "search by ID/name",
                     ),
+                     
                 ),
             ),
             body: FutureBuilder(
-                future: api.searchByName("Wizards"),
+                future: results,
                 builder: (context, snapshot){
                     if(snapshot.connectionState == ConnectionState.waiting){
                         return CircularProgressIndicator();
