@@ -1,17 +1,19 @@
 import "package:flutter/material.dart";
-import "package:kiteapp/TmdbSearch.dart";
-import "MovieCard.dart";
-import "BottomNav.dart";
-import "Movie.dart";
-import "API.dart";
+import "package:kiteapp/screens/TmdbSearch.dart";
+import "package:kiteapp/api/API.dart";
+import "package:kiteapp/widgets/BottomNav.dart";
+import "package:kiteapp/model/Movie.dart";
+import "package:kiteapp/widgets/MovieCard.dart";
 
 class Homepage extends StatefulWidget {
+  const Homepage({super.key});
+
   @override
   State<Homepage> createState() => _HomepageState();
 }
 
 class _HomepageState extends State<Homepage> {
-  API api = new API();
+  API api = API();
 
   @override
   Widget build(BuildContext context) {

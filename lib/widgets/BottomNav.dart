@@ -1,8 +1,7 @@
-import "package:flutter/cupertino.dart";
 import "package:flutter/material.dart";
-import "package:kiteapp/Common.dart";
-import "HomePage.dart";
-import "List.dart";
+import "package:kiteapp/common/Common.dart";
+import "package:kiteapp/screens/HomePage.dart";
+import "package:kiteapp/screens/List.dart";
 
 class BottomNav extends StatelessWidget {
   @override

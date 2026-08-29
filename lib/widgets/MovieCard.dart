@@ -1,8 +1,8 @@
 import "package:flutter/material.dart";
-import "package:kiteapp/Common.dart";
-import "package:kiteapp/MoviePlayer.dart";
-import "package:kiteapp/Rating.dart";
-import "Movie.dart";
+import "package:kiteapp/common/Common.dart";
+import "package:kiteapp/screens/MoviePlayer.dart";
+import "package:kiteapp/widgets/Rating.dart";
+import "package:kiteapp/model/Movie.dart";
 
 class MovieCard extends StatelessWidget {
   Movie movie;

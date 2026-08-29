@@ -1,5 +1,5 @@
 import "package:flutter/material.dart";
-import "package:kiteapp/Common.dart";
+import "package:kiteapp/common/Common.dart";
 
 class Rating extends StatelessWidget {
   double rating;

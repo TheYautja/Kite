@@ -1,7 +1,7 @@
 import "package:flutter/material.dart";
-import "package:kiteapp/API.dart";
-import "package:kiteapp/Movie.dart";
-import "package:kiteapp/MovieCard.dart";
+import "package:kiteapp/api/API.dart";
+import "package:kiteapp/model/Movie.dart";
+import "package:kiteapp/widgets/MovieCard.dart";
 
 class TmdbSearchPage extends StatefulWidget {
   const TmdbSearchPage({super.key});
