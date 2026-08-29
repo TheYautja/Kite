@@ -1,9 +1,11 @@
-import "dart:ui";
+import 'package:flutter/material.dart';
 
-const Color kiteDarkB = Color(0xFF03444A);
-const Color kiteMidB = Color(0xFF00A8A8);
-const Color kiteLightB = Color(0xFF9AD3DA);
-const Color kiteBack = Color(0xFFeaf9f5);
-const Color kiteLightO = Color(0xFFFF924D);
-const Color kiteAmber = Color(0xFFFFBF00);
-const Color kiteDarkO = Color(0xFFE66414);
+const Color kiteBackground    = Color(0xFF0B0B10);
+const Color kiteSurface       = Color(0xFF15151D); 
+const Color kiteSurfaceLight  = Color(0xFF20202A);
+const Color kitePrimary       = Color(0xFF8B5CF6);
+const Color kitePrimaryLight  = Color(0xFFA78BFA);
+const Color kiteText          = Color(0xFFF5F5F5);
+const Color kiteTextSecondary = Color(0xFFA1A1AA);
+const Color kiteAmber         = Color(0xFFFBBF24);
+const Color kiteError         = Color(0xFFEF4444);
