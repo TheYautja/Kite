@@ -33,7 +33,7 @@ class _CarouselListState extends State<CarouselList> {
                     Text("Top Rated"),
                     Expanded(
                         child: CarouselView(
-                            itemExtent: double.infinity,
+                            itemExtent: 100,
                             children: List<Widget>.generate(
                                 widget.top.length,
                                 (int index){
@@ -45,7 +45,7 @@ class _CarouselListState extends State<CarouselList> {
                     Text("Popular"),
                     Expanded(
                         child: CarouselView(
-                            itemExtent: double.infinity,
+                            itemExtent: 100,
                             children: List<Widget>.generate(
                                 widget.popular.length,
                                 (int index){
@@ -57,7 +57,7 @@ class _CarouselListState extends State<CarouselList> {
                     Text("Upcoming"),
                     Expanded(
                         child: CarouselView(
-                            itemExtent: double.infinity,
+                            itemExtent: 100,
                             children: List<Widget>.generate(
                                 widget.upcoming.length,
                                 (int index){
