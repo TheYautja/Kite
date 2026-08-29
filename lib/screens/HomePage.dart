@@ -4,6 +4,7 @@ import "package:kiteapp/api/API.dart";
 import "package:kiteapp/widgets/BottomNav.dart";
 import "package:kiteapp/model/Movie.dart";
 import "package:kiteapp/widgets/MovieCard.dart";
+import "package:kiteapp/widgets/CarouselList.dart";
 
 class Homepage extends StatefulWidget {
   const Homepage({super.key});
