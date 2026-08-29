@@ -14,52 +14,61 @@ class Homepage extends StatefulWidget {
 }
 
 class _HomepageState extends State<Homepage> {
-  API api = API();
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("Kite"),
-        actions: [
-          IconButton(
-            onPressed: () => Navigator.of(
-              context,
-            ).push(MaterialPageRoute(builder: (_) => TmdbSearchPage())),
-            icon: Icon(Icons.search),
-          ),
-        ],
-      ),
-
-      body: FutureBuilder(
-        future: loadAllMovies(),
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(child: CircularProgressIndicator());
-          }
-          if (snapshot.hasError) {
-            return Center(child: Text("Error: ${snapshot.error}"));
-          }
-
-          if (!snapshot.hasData) {
-            return Text("Empty snapshot");
-          }
-
-          final List<Movie> top = snapshot.data![0];
-          final List<Movie> popular = snapshot.data![1];
-          final List<Movie> upcoming = snapshot.data![2];
-
-          return CarouselList(top: top, popular: popular, upcoming: upcoming, type: "debug");
-
-          },
-      ),
-
-      bottomSheet: BottomNav(),
-    );
-  }
 
 
-    Future<List<dynamic>> loadAllMovies() async {
+    API api = API();
+    late Future<List<List<Movie>>> movies;
+
+    @override 
+    void initState(){
+        super.initState();
+        movies = loadAllMovies();
+    }
+    
+
+    @override
+    Widget build(BuildContext context) {
+        return Scaffold(
+        appBar: AppBar(
+            title: Text("Kite"),
+            actions: [
+                IconButton(
+                    onPressed: () => Navigator.of(
+                        context,
+                    ).push(MaterialPageRoute(builder: (_) => TmdbSearchPage())),
+                    icon: Icon(Icons.search),
+                ),
+            ],
+        ),
+
+        body: FutureBuilder<List<List<Movie>>>(
+            future: movies,
+            builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                    return Center(child: CircularProgressIndicator());
+                }
+                if (snapshot.hasError) {
+                    return Center(child: Text("Error: ${snapshot.error}"));
+                }
+                if (!snapshot.hasData) {
+                    return Text("Empty snapshot");
+                }
+
+                final List<Movie> top = snapshot.data![0];
+                final List<Movie> popular = snapshot.data![1];
+                final List<Movie> upcoming = snapshot.data![2];
+
+                return CarouselList(top: top, popular: popular, upcoming: upcoming);
+
+            },
+        ),
+
+        bottomNavigationBar: BottomNav(),
+        );
+    }
+
+
+    Future<List<List<Movie>>> loadAllMovies() async {
 
         final results = await Future.wait([
             api.getMovies("popular"),

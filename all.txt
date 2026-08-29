@@ -1,0 +1,583 @@
+import "package:kiteapp/model/Movie.dart";
+import "package:http/http.dart" as http;
+import "package:flutter_dotenv/flutter_dotenv.dart";
+import "dart:convert";
+
+class API {
+    final String ACCESS_TOKEN = dotenv.get("ACCESS_TOKEN");
+    final String baseUrl = "https://api.themoviedb.org/3/movie/";
+
+    static final API _api = API._internal();
+
+    //singleton
+    factory API() {
+        return _api;
+    }
+
+    API._internal();
+
+    Future<List<Movie>> getMovies(String requestType) async {
+        String finalUrl = baseUrl + requestType;
+        final response = await http.get(
+            Uri.parse(finalUrl),
+                headers: {
+                'Authorization': 'Bearer ${ACCESS_TOKEN}',
+                'Accept': 'application/json',
+            },
+        );
+
+        if (response.statusCode == 200) {
+            return MovieResponse.fromJson(json.decode(response.body)).response;
+        } else {
+            throw Exception("${response.statusCode}");
+        }
+    }
+
+
+    Future<List<Movie>> searchByName(String name) async {
+        String url = "https://api.themoviedb.org/3/search/movie?query=${parseInput(name)}";
+        final response = await http.get(
+            Uri.parse(url),
+            headers: {
+                'Authorization': 'Bearer ${ACCESS_TOKEN}',
+                'Accept': 'application/json',
+            },
+        );
+
+        if(response.statusCode == 200){
+            return MovieResponse.fromJson(json.decode(response.body)).response;
+        } else {
+            throw Exception("${response.statusCode}");
+        }
+
+    }
+
+
+    String parseInput(String input){
+        return input.trim().replaceAll(" ", "+");
+    }
+
+}
+import "dart:ui";
+
+const Color kiteDarkB = Color(0xFF03444A);
+const Color kiteMidB = Color(0xFF00A8A8);
+const Color kiteLightB = Color(0xFF9AD3DA);
+const Color kiteBack = Color(0xFFeaf9f5);
+const Color kiteLightO = Color(0xFFFF924D);
+const Color kiteAmber = Color(0xFFFFBF00);
+const Color kiteDarkO = Color(0xFFE66414);
+class Movie {
+  int id;
+  String name;
+  String imgUrl;
+  List<int> genre;
+  String date;
+  double rating;
+  String description;
+
+  Movie({
+    required this.id,
+    required this.name,
+    required this.date,
+    required this.genre,
+    required this.rating,
+    required this.imgUrl,
+    required this.description,
+  });
+
+  factory Movie.fromJson(Map<String, dynamic> json) {
+
+    return Movie(
+      id: json['id'],
+      name: json['title'],
+      imgUrl: json['poster_path'] != null ? "https://tmdb.org/t/p/w500${json['poster_path']}" : " ",
+      genre: List<int>.from(json['genre_ids']),
+      date: json['release_date'],
+      rating: json['vote_average'].toDouble(),
+      description: json['overview'],
+    );
+  }
+}
+
+class MovieResponse {
+  final List<Movie> response;
+
+  MovieResponse({required this.response});
+
+  factory MovieResponse.fromJson(Map<String, dynamic> json) {
+    return MovieResponse(
+      response: List<Movie>.from(
+        (json['results'] ?? []).map((x) => Movie.fromJson(x)),
+      ),
+    );
+  }
+}
+import "package:flutter/material.dart";
+import "package:kiteapp/screens/TmdbSearch.dart";
+import "package:kiteapp/api/API.dart";
+import "package:kiteapp/widgets/BottomNav.dart";
+import "package:kiteapp/model/Movie.dart";
+import "package:kiteapp/widgets/MovieCard.dart";
+import "package:kiteapp/widgets/CarouselList.dart";
+
+class Homepage extends StatefulWidget {
+  const Homepage({super.key});
+
+  @override
+  State<Homepage> createState() => _HomepageState();
+}
+
+class _HomepageState extends State<Homepage> {
+
+
+    API api = API();
+    late Future<List<List<Movie>>> movies;
+
+    @override 
+    void initState(){
+        super.initState();
+        movies = loadAllMovies();
+    }
+    
+
+    @override
+    Widget build(BuildContext context) {
+        return Scaffold(
+        appBar: AppBar(
+            title: Text("Kite"),
+            actions: [
+                IconButton(
+                    onPressed: () => Navigator.of(
+                        context,
+                    ).push(MaterialPageRoute(builder: (_) => TmdbSearchPage())),
+                    icon: Icon(Icons.search),
+                ),
+            ],
+        ),
+
+        body: FutureBuilder<List<List<Movie>>>(
+            future: movies,
+            builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                    return Center(child: CircularProgressIndicator());
+                }
+                if (snapshot.hasError) {
+                    return Center(child: Text("Error: ${snapshot.error}"));
+                }
+                if (!snapshot.hasData) {
+                    return Text("Empty snapshot");
+                }
+
+                final List<Movie> top = snapshot.data![0];
+                final List<Movie> popular = snapshot.data![1];
+                final List<Movie> upcoming = snapshot.data![2];
+
+                return CarouselList(top: top, popular: popular, upcoming: upcoming);
+
+            },
+        ),
+
+        bottomNavigationBar: BottomNav(),
+        );
+    }
+
+
+    Future<List<List<Movie>>> loadAllMovies() async {
+
+        final results = await Future.wait([
+            api.getMovies("popular"),
+            api.getMovies("top_rated"),
+            api.getMovies("upcoming"),
+        ]);
+
+        return results;
+    }
+
+
+}
+import "package:flutter/material.dart";
+import "package:kiteapp/widgets/MovieCard.dart";
+import "package:kiteapp/model/Movie.dart";
+
+class MovieList extends StatelessWidget {
+  //Movie movie = Movie(name: "big if true", id: "123345", imgUrl: "https://picsum.photos/200");
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(),
+      body: ListView(
+        children: [
+          //MovieCard(movie: movie),
+        ],
+      ),
+    );
+  }
+}
+import 'package:flutter/material.dart';
+import 'package:kiteapp/widgets/BottomNav.dart';
+import "package:kiteapp/widgets/Rating.dart";
+import 'package:webview_flutter/webview_flutter.dart';
+import "package:kiteapp/model/Movie.dart";
+
+class MoviePlayer extends StatefulWidget {
+  final Movie movie;
+
+  const MoviePlayer({super.key, required this.movie});
+
+  @override
+  State<MoviePlayer> createState() => _MoviePlayerState();
+}
+
+class _MoviePlayerState extends State<MoviePlayer> {
+  late final WebViewController controller;
+
+  @override
+  void initState() {
+    String tmdbId = widget.movie.id.toString();
+
+    super.initState();
+
+    controller = WebViewController()
+      ..setJavaScriptMode(JavaScriptMode.unrestricted)
+      ..loadRequest(Uri.parse("https://vsembed.ru/embed/movie/${tmdbId}/"))
+      ..setNavigationDelegate(
+        NavigationDelegate(
+          onNavigationRequest: (NavigationRequest request) {
+            if (!request.url.startsWith("https://vsembed.ru/embed/movie")) {
+              return NavigationDecision.prevent;
+            } else {
+              return NavigationDecision.navigate;
+            }
+          },
+        ),
+      );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: const Text('Watch')),
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Expanded(flex: 3, child: WebViewWidget(controller: controller)),
+          Expanded(
+            flex: 7,
+            child: Padding(
+              padding: EdgeInsets.all(10),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    widget.movie.name,
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 22),
+                  ),
+                  Text(
+                    widget.movie.date.toString(),
+                    style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                  ),
+                  Rating(rating: widget.movie.rating),
+                  Text(widget.movie.description),
+                  Spacer(),
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
+      bottomSheet: BottomNav(),
+    );
+  }
+}
+import "package:flutter/material.dart";
+import "package:kiteapp/api/API.dart";
+import "package:kiteapp/model/Movie.dart";
+import "package:kiteapp/widgets/MovieCard.dart";
+
+class TmdbSearchPage extends StatefulWidget {
+  const TmdbSearchPage({super.key});
+
+  @override
+  State<TmdbSearchPage> createState() => _TmdbSearchPageState();
+}
+
+class _TmdbSearchPageState extends State<TmdbSearchPage> {
+
+    final api = API();
+    final TextEditingController _searchController = TextEditingController();
+    late Future<List<Movie>> results;
+
+
+    @override
+      void initState() {
+        super.initState();
+        results = api.getMovies("upcoming");
+      }
+
+
+    @override
+    Widget build(BuildContext context) {
+
+        return Scaffold(
+            appBar: AppBar(
+                title: TextField(
+                    controller: _searchController,
+                    onSubmitted: (String text){
+                        setState(() {
+                            results = api.searchByName(text);
+                        });                       
+                    }, 
+                    decoration: InputDecoration(
+                        border: OutlineInputBorder(),
+                        hintText: "search by ID/name",
+                    ),
+                     
+                ),
+            ),
+            body: FutureBuilder(
+                future: results,
+                builder: (context, snapshot){
+                    if(snapshot.connectionState == ConnectionState.waiting){
+                        return CircularProgressIndicator();
+                    }
+                    if(snapshot.connectionState == ConnectionState.none){
+                        return Text("connection failed");
+                    }
+                    if(!snapshot.hasData){
+                        return Center(child: Text("No results found"));
+                    }
+
+                    List<Movie> movieList = snapshot.data!;
+                    
+                    return GridView.builder(
+                        padding: const EdgeInsets.all(8),
+                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 2,
+                            mainAxisSpacing: 8,
+                            crossAxisSpacing: 8,
+                        ),
+                        itemCount: movieList.length,
+                        itemBuilder: (context, index){
+                            return MovieCard(movie: movieList[index]);
+                        }
+                    );
+
+                },
+            ) 
+        );
+    }
+}
+import "package:flutter/material.dart";
+import "package:kiteapp/common/Common.dart";
+import "package:kiteapp/screens/HomePage.dart";
+import "package:kiteapp/screens/List.dart";
+
+class BottomNav extends StatelessWidget {
+  @override
+  Widget build(BuildContext context) {
+    return Expanded(
+      child: Container(
+        color: kiteLightB,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            IconButton(
+              color: kiteDarkB,
+              icon: Icon(Icons.home),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => Homepage()),
+                );
+              },
+            ),
+            IconButton(
+              color: kiteDarkB,
+              icon: Icon(Icons.list),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => MovieList()),
+                );
+              },
+            ),
+            IconButton(
+              color: kiteDarkB,
+              icon: Icon(Icons.person),
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => Text("later")),
+                );
+              },
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+import 'package:flutter/material.dart';
+import 'package:kiteapp/model/Movie.dart';
+import 'package:kiteapp/widgets/MovieCard.dart';
+
+class CarouselList extends StatelessWidget {
+
+    final List<Movie> top;
+    final List<Movie> popular;
+    final List<Movie> upcoming;
+
+    const CarouselList({
+        super.key,
+        required this.top,
+        required this.popular,
+        required this.upcoming,
+    });
+
+    @override
+    Widget build(BuildContext context) {
+        return Expanded(
+            child: ListView(
+                children: [
+                    const Text("Top Rated"),
+
+                    SizedBox(
+                        height: 250,
+                        child: CarouselView(
+                            itemExtent: 150,
+                            children: top.map((movie) {
+                                return MovieCard(movie: movie);
+                            }).toList(),
+                        ),
+                    ),
+
+                    const Text("Popular"),
+
+                    SizedBox(
+                        height: 250,
+                        child: CarouselView(
+                            itemExtent: 150,
+                            children: popular.map((movie) {
+                                return MovieCard(movie: movie);
+                            }).toList(),
+                        ),
+                    ),
+
+                    const Text("Upcoming"),
+
+                    SizedBox(
+                        height: 250,
+                        child: CarouselView(
+                            itemSnapping: true,
+                            itemExtent: 150,
+                            children: upcoming.map((movie) {
+                                return MovieCard(movie: movie);
+                            }).toList(),
+                        ),
+                    ),
+                ],
+            ),
+        );
+    }
+}
+import "package:flutter/material.dart";
+import "package:kiteapp/common/Common.dart";
+import "package:kiteapp/screens/MoviePlayer.dart";
+import "package:kiteapp/widgets/Rating.dart";
+import "package:kiteapp/model/Movie.dart";
+
+class MovieCard extends StatelessWidget {
+  Movie movie;
+
+  MovieCard({required this.movie});
+
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      color: kiteBack,
+      clipBehavior: Clip.antiAlias,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Expanded(
+            flex: 6,
+            child: Image.network(
+              movie.imgUrl,
+              fit: BoxFit.cover,
+              width: double.infinity,
+              loadingBuilder: (context, child, loadingProgress) {
+                if (loadingProgress == null) return child;
+                return const Center(child: CircularProgressIndicator());
+              },
+            ),
+          ),
+          Expanded(
+            flex: 4,
+            child: Padding(
+              padding: const EdgeInsets.all(8),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    movie.name,
+                    maxLines: 2,
+                    overflow: TextOverflow.ellipsis,
+                    style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16,
+                    ),
+                  ),
+
+                  Spacer(),
+
+                  Row(
+                    children: [
+                      IconButton(
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => MoviePlayer(movie: movie),
+                            ),
+                          );
+                        },
+                        icon: Icon(Icons.play_circle),
+                        color: Colors.amber,
+                      ),
+                      Spacer(),
+                      Rating(rating: movie.rating),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+//"https://image.tmdb.org/t/p/w500${movie.imgUrl}"
+import "package:flutter/material.dart";
+import "package:kiteapp/common/Common.dart";
+
+class Rating extends StatelessWidget {
+  double rating;
+
+  Rating({required this.rating});
+
+  @override
+  Widget build(BuildContext context) {
+    final String rStr = rating.toStringAsFixed(1);
+
+    return Row(
+      children: [
+        Icon(Icons.star, color: kiteAmber),
+        Text(rStr, style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
+      ],
+    );
+  }
+}

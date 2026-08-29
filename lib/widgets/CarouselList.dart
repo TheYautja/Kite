@@ -1,72 +1,62 @@
 import 'package:flutter/material.dart';
-import "package:kiteapp/api/API.dart";
-import "package:kiteapp/model/Movie.dart";
-import "package:kiteapp/model/Series.dart";
-import "package:kiteapp/widgets/MovieCard.dart";
+import 'package:kiteapp/model/Movie.dart';
+import 'package:kiteapp/widgets/MovieCard.dart';
 
-class CarouselList extends StatefulWidget{
+class CarouselList extends StatelessWidget {
 
-    late List<Movie> top;
-    late List<Movie> popular;
-    late List<Movie> upcoming;
-    late String type;
+    final List<Movie> top;
+    final List<Movie> popular;
+    final List<Movie> upcoming;
 
-    CarouselList({
+    const CarouselList({
+        super.key,
         required this.top,
         required this.popular,
         required this.upcoming,
-        required this.type
     });
 
     @override
-    State<CarouselList> createState() => _CarouselListState();
-
-}
-
-class _CarouselListState extends State<CarouselList> {
-
-    @override
-    Widget build (BuildContext context) {
+    Widget build(BuildContext context) {
         return Expanded(
-            child: Column(
+            child: ListView(
                 children: [
-                    Text("Top Rated"),
-                    Expanded(
+                    const Text("Top Rated"),
+
+                    SizedBox(
+                        height: 250,
                         child: CarouselView(
-                            itemExtent: 100,
-                            children: List<Widget>.generate(
-                                widget.top.length,
-                                (int index){
-                                    return MovieCard(movie: widget.top[index]);
-                                }
-                            ),
+                            itemExtent: 150,
+                            children: top.map((movie) {
+                                return MovieCard(movie: movie);
+                            }).toList(),
                         ),
                     ),
-                    Text("Popular"),
-                    Expanded(
+
+                    const Text("Popular"),
+
+                    SizedBox(
+                        height: 250,
                         child: CarouselView(
-                            itemExtent: 100,
-                            children: List<Widget>.generate(
-                                widget.popular.length,
-                                (int index){
-                                    return MovieCard(movie: widget.popular[index]);
-                                }
-                            ),
+                            itemExtent: 150,
+                            children: popular.map((movie) {
+                                return MovieCard(movie: movie);
+                            }).toList(),
                         ),
                     ),
-                    Text("Upcoming"),
-                    Expanded(
+
+                    const Text("Upcoming"),
+
+                    SizedBox(
+                        height: 250,
                         child: CarouselView(
-                            itemExtent: 100,
-                            children: List<Widget>.generate(
-                                widget.upcoming.length,
-                                (int index){
-                                    return MovieCard(movie: widget.upcoming[index]);
-                                }
-                            ),
+                            itemSnapping: true,
+                            itemExtent: 150,
+                            children: upcoming.map((movie) {
+                                return MovieCard(movie: movie);
+                            }).toList(),
                         ),
                     ),
-                ]
+                ],
             ),
         );
     }
