@@ -20,13 +20,13 @@ class Movie {
   factory Movie.fromJson(Map<String, dynamic> json) {
 
     return Movie(
-      id: json['id'],
-      name: json['title'],
+      id: json['id'] ?? 0,
+      name: json['title'] ?? "Unknown",
       imgUrl: json['poster_path'] != null ? "https://tmdb.org/t/p/w500${json['poster_path']}" : " ",
-      genre: List<int>.from(json['genre_ids']),
-      date: json['release_date'],
+      genre: List<int>.from(json['genre_ids'] ?? []),
+      date: json['release_date'] ?? "Unknown",
       rating: json['vote_average'].toDouble(),
-      description: json['overview'],
+      description: json['overview'] ?? "No overview avaliable",
     );
   }
 }
