@@ -32,7 +32,7 @@ class _HomepageState extends State<Homepage> {
       ),
 
       body: FutureBuilder(
-        future: api.getMovies("top_rated"),
+        future: loadAllMovies(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return Center(child: CircularProgressIndicator());
@@ -44,25 +44,31 @@ class _HomepageState extends State<Homepage> {
           if (!snapshot.hasData) {
             return Text("Empty snapshot");
           }
-          List<Movie> movieList = snapshot.data!;
 
-          return GridView.builder(
-            padding: const EdgeInsets.all(8),
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2,
-              crossAxisSpacing: 8,
-              mainAxisSpacing: 8,
-              childAspectRatio: 0.65,
-            ),
-            itemCount: movieList.length,
-            itemBuilder: (context, index) {
-              return MovieCard(movie: movieList[index]);
-            },
-          );
-        },
+          final List<Movie> top = snapshot.data![0];
+          final List<Movie> popular = snapshot.data![1];
+          final List<Movie> upcoming = snapshot.data![2];
+
+          return CarouselList(top: top, popular: popular, upcoming: upcoming, type: "debug");
+
+          },
       ),
 
       bottomSheet: BottomNav(),
     );
   }
+
+
+    Future<List<dynamic>> loadAllMovies() async {
+
+        final results = await Future.wait([
+            api.getMovies("popular"),
+            api.getMovies("top_rated"),
+            api.getMovies("upcoming"),
+        ]);
+
+        return results;
+    }
+
+
 }
