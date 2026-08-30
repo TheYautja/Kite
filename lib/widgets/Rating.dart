@@ -14,7 +14,7 @@ class Rating extends StatelessWidget {
             mainAxisSize: MainAxisSize.min,     
             children: [
                 Icon(Icons.star, color: kiteAmber),
-                Text(rStr, style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
+                Text(rStr, style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16, color: kiteText )),
             ],
         );
     }
