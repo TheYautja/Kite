@@ -8,12 +8,12 @@ class BottomNav extends StatelessWidget {
   Widget build(BuildContext context) {
     return Expanded(
       child: Container(
-        color: kiteLightB,
+        color: kiteSurface,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             IconButton(
-              color: kiteDarkB,
+              color: kiteText,
               icon: Icon(Icons.home),
               onPressed: () {
                 Navigator.push(
@@ -23,7 +23,7 @@ class BottomNav extends StatelessWidget {
               },
             ),
             IconButton(
-              color: kiteDarkB,
+              color: kiteText,
               icon: Icon(Icons.list),
               onPressed: () {
                 Navigator.push(
@@ -33,7 +33,7 @@ class BottomNav extends StatelessWidget {
               },
             ),
             IconButton(
-              color: kiteDarkB,
+              color: kiteText,
               icon: Icon(Icons.person),
               onPressed: () {
                 Navigator.push(
