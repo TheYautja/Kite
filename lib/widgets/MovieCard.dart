@@ -5,6 +5,7 @@ import 'package:kiteapp/model/Movie.dart';
 import 'package:kiteapp/screens/MoviePlayer.dart';
 import 'package:kiteapp/widgets/Rating.dart';
 import 'package:marquee/marquee.dart';
+import 'package:auto_size_text/auto_size_text.dart';
 
 class MovieCard extends StatelessWidget {
     final Movie movie;
@@ -74,22 +75,28 @@ class MovieCard extends StatelessWidget {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                     Expanded(
-                                        child: Marquee(
-                                            text: movie.name,
-                                            style: const TextStyle(
-                                                color: kiteText,
-                                                fontWeight: FontWeight.bold,
-                                                fontSize: 15,
+                                        child: AutoSizeText(
+                                            movie.name,
+                                            maxLines: 1,
+                                            style: TextStyle(color: kiteText, fontSize: 15, fontWeight: FontWeight.bold),
+                                            minFontSize: 15,
+                                            overflowReplacement:  Marquee(
+                                                text: movie.name,
+                                                style: const TextStyle(
+                                                    color: kiteText,
+                                                    fontWeight: FontWeight.bold,
+                                                    fontSize: 15,
+                                                ),
+                                                scrollAxis: Axis.horizontal,
+                                                crossAxisAlignment: CrossAxisAlignment.start,
+                                                blankSpace: 40.0,
+                                                velocity: 30.0,
+                                                pauseAfterRound: Duration(seconds: 2),
+                                                startPadding: 0,
+                                                accelerationDuration: Duration(milliseconds: 500),
+                                                decelerationDuration: Duration(milliseconds: 500),
                                             ),
-                                            scrollAxis: Axis.horizontal,
-                                            crossAxisAlignment: CrossAxisAlignment.start,
-                                            blankSpace: 40.0,
-                                            velocity: 30.0,
-                                            pauseAfterRound: Duration(seconds: 2),
-                                            startPadding: 0,
-                                            accelerationDuration: Duration(milliseconds: 500),
-                                            decelerationDuration: Duration(milliseconds: 500),
-                                        )
+                                        )   
                                     ),
 
                                     const SizedBox(height: 4),
