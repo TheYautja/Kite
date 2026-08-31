@@ -4,6 +4,7 @@ import 'package:kiteapp/common/Common.dart';
 import 'package:kiteapp/model/Movie.dart';
 import 'package:kiteapp/screens/MoviePlayer.dart';
 import 'package:kiteapp/widgets/Rating.dart';
+import 'package:kiteapp/widgets/ScrollableText.dart';
 import 'package:marquee/marquee.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 
@@ -26,45 +27,51 @@ class MovieCard extends StatelessWidget {
                 children: [
                     Expanded(
                         flex: 7,
-                        child: movie.imgUrl.isEmpty
-                            ? const Center(
-                                child: Icon(
-                                    Icons.movie_outlined,
-                                    size: 40,
-                                    color: kiteTextSecondary,
-                                ),
-                            )
-                            : Image.network(
-                                movie.imgUrl,
-                                width: double.infinity,
-                                fit: BoxFit.cover,
-                                loadingBuilder: (
-                                    context,
-                                    child,
-                                    loadingProgress,
-                                ) {
-                                    if (loadingProgress == null) {
-                                        return child;
-                                    }
-
-                                    return const Center(
-                                        child: CircularProgressIndicator(),
-                                    );
-                                },
-                                errorBuilder: (
-                                    context,
-                                    error,
-                                    stackTrace,
-                                ) {
-                                    return const Center(
-                                        child: Icon(
-                                            Icons.broken_image_outlined,
-                                            size: 40,
-                                            color: kiteTextSecondary,
-                                        ),
-                                    );
-                                },
-                            ),
+                        child: InkWell(
+                          onTap: (){
+                            print("clicked card, debug");
+                            Navigator.push(context, MaterialPageRoute(builder: (_) => MoviePlayer(movie: movie)));
+                          },
+                          child: movie.imgUrl.isEmpty
+                              ? const Center(
+                                  child: Icon(
+                                      Icons.movie_outlined,
+                                      size: 40,
+                                      color: kiteTextSecondary,
+                                  ),
+                              )
+                              : Image.network(
+                                  movie.imgUrl,
+                                  width: double.infinity,
+                                  fit: BoxFit.cover,
+                                  loadingBuilder: (
+                                      context,
+                                      child,
+                                      loadingProgress,
+                                  ) {
+                                      if (loadingProgress == null) {
+                                          return child;
+                                      }
+                          
+                                      return const Center(
+                                          child: CircularProgressIndicator(),
+                                      );
+                                  },
+                                  errorBuilder: (
+                                      context,
+                                      error,
+                                      stackTrace,
+                                  ) {
+                                      return const Center(
+                                          child: Icon(
+                                              Icons.broken_image_outlined,
+                                              size: 40,
+                                              color: kiteTextSecondary,
+                                          ),
+                                      );
+                                  },
+                              ),
+                        ),
                     ),
 
                     Expanded(
@@ -75,28 +82,7 @@ class MovieCard extends StatelessWidget {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                     Expanded(
-                                        child: AutoSizeText(
-                                            movie.name,
-                                            maxLines: 1,
-                                            style: TextStyle(color: kiteText, fontSize: 15, fontWeight: FontWeight.bold),
-                                            minFontSize: 15,
-                                            overflowReplacement:  Marquee(
-                                                text: movie.name,
-                                                style: const TextStyle(
-                                                    color: kiteText,
-                                                    fontWeight: FontWeight.bold,
-                                                    fontSize: 15,
-                                                ),
-                                                scrollAxis: Axis.horizontal,
-                                                crossAxisAlignment: CrossAxisAlignment.start,
-                                                blankSpace: 40.0,
-                                                velocity: 30.0,
-                                                pauseAfterRound: Duration(seconds: 2),
-                                                startPadding: 0,
-                                                accelerationDuration: Duration(milliseconds: 500),
-                                                decelerationDuration: Duration(milliseconds: 500),
-                                            ),
-                                        )   
+                                        child: ScrollableText(text: movie.name),
                                     ),
 
                                     const SizedBox(height: 4),
