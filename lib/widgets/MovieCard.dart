@@ -50,23 +50,11 @@ class MovieCard extends StatelessWidget {
 
                                     Row(
                                         children: [
-                                            Rating(
-                                                rating: movie.rating,
-                                            ),
-
+                                            Rating(rating: movie.rating),
                                             const Spacer(),
-
                                             IconButton(
                                                 onPressed: () {
-                                                    Navigator.push(
-                                                        context,
-                                                        MaterialPageRoute(
-                                                            builder: (_) =>
-                                                                MoviePlayer(
-                                                                    movie: movie,
-                                                                ),
-                                                        ),
-                                                    );
+                                                    Navigator.push(context,MaterialPageRoute(builder: (_) => MoviePlayer(movie: movie)));
                                                 },
                                                 icon: const Icon(
                                                     Icons.play_circle,
@@ -74,8 +62,7 @@ class MovieCard extends StatelessWidget {
                                                 color: kitePrimary,
                                                 tooltip: 'Watch',
                                                 padding: EdgeInsets.zero,
-                                                constraints:
-                                                    const BoxConstraints(),
+                                                constraints: const BoxConstraints(),
                                             ),
                                         ],
                                     ),
