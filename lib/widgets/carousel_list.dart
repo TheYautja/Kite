@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:kiteapp/model/Movie.dart';
-import 'package:kiteapp/widgets/MovieCard.dart';
+import 'package:kiteapp/model/movie.dart';
+import 'package:kiteapp/widgets/movie_card.dart';
 
 class CarouselList extends StatelessWidget {
 

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:kiteapp/widgets/BottomNav.dart';
-import "package:kiteapp/widgets/Rating.dart";
+import 'package:kiteapp/widgets/bottom_nav.dart';
+import "package:kiteapp/widgets/rating.dart";
 import 'package:webview_flutter/webview_flutter.dart';
-import "package:kiteapp/model/Movie.dart";
+import "package:kiteapp/model/movie.dart";
 
 class MoviePlayer extends StatefulWidget {
   final Movie movie;

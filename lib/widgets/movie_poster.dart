@@ -1,5 +1,5 @@
 import "package:flutter/material.dart";
-import "package:kiteapp/common/Common.dart";
+import "package:kiteapp/common/common.dart";
 
 
 class MoviePoster extends StatelessWidget{

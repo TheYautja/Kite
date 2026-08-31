@@ -1,10 +1,9 @@
 import "package:flutter/material.dart";
-import "package:kiteapp/screens/TmdbSearch.dart";
-import "package:kiteapp/api/API.dart";
-import "package:kiteapp/widgets/BottomNav.dart";
-import "package:kiteapp/model/Movie.dart";
-import "package:kiteapp/widgets/MovieCard.dart";
-import "package:kiteapp/widgets/CarouselList.dart";
+import "package:kiteapp/screens/tmdb_search.dart";
+import "package:kiteapp/api/api.dart";
+import "package:kiteapp/widgets/bottom_nav.dart";
+import "package:kiteapp/model/movie.dart";
+import "package:kiteapp/widgets/carousel_list.dart";
 
 class Homepage extends StatefulWidget {
   const Homepage({super.key});
