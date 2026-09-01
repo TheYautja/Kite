@@ -27,7 +27,6 @@ class MovieCard extends StatelessWidget {
                         flex: 7,
                         child: InkWell(
                           onTap: (){
-                            print("clicked card, debug");
                             Navigator.push(context, MaterialPageRoute(builder: (_) => MoviePlayer(movie: movie)));
                           },
                           child: MoviePoster(path: movie.imgUrl),

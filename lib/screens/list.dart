@@ -4,15 +4,14 @@ import "package:kiteapp/model/movie.dart";
 
 class MovieList extends StatelessWidget {
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(),
-      body: ListView(
-        children: [
-          //MovieCard(movie: movie),
-        ],
-      ),
-    );
-  }
+    late List<Movie> movies;
+
+    @override
+    Widget build(BuildContext context) {
+        return Scaffold(
+            appBar: AppBar(),
+            body: Text("test"),
+        );
+    }
+
 }
