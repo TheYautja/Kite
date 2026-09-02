@@ -32,7 +32,7 @@ class Movie {
     }
 
     
-    Map toJson() {
+    Map<String, dynamic> toJson() {
         return <String, dynamic>{
            'id': id,
            'name': name,

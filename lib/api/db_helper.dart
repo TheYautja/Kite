@@ -23,7 +23,7 @@ class DbHelper {
 
     Future<Database> initDb () async {
         String dbPath = await getDatabasesPath();
-        String path = join(dbPath, "userMovies.db");
+        String path = "${dbPath}userMovies.db";
 
         return await openDatabase(path, version: 1, onCreate: _onCreate);
     }
@@ -37,7 +37,7 @@ class DbHelper {
                 date TEXT,
                 rating DECIMAL,
                 imgUrl TEXT,
-                description TEXT,
+                description TEXT
             ) 
         ''');
     }
@@ -49,6 +49,12 @@ class DbHelper {
         Map<String, dynamic> row = movie.toJson();
 
         return await db.insert("user_movies", row);
+    }
+
+
+    Future<int> deleteMovieById(List<int> args) async {
+        Database db = await _helper.db;
+        return await db.delete("user_movies", where: "id = ?", whereArgs: args);
     }
 
 

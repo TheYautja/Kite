@@ -41,7 +41,7 @@ class MovieCard extends StatelessWidget {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
 
-                                    ScrollableText(text: movie.name), //fuckass not showing on mobile, FIX
+                                    Expanded(child: ScrollableText(text: movie.name)),
 
                                     const SizedBox(height: 4),
 
