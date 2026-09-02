@@ -45,7 +45,10 @@ class DbHelper {
 
     Future<int> insertMovie(Movie movie) async {
         Database db = await _helper.db;
-        return await db.insert("user_movies", movie.toMap());
+
+        Map<String, dynamic> row = movie.toJson();
+
+        return await db.insert("user_movies", row);
     }
 
 
