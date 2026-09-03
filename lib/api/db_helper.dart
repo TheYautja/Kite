@@ -22,6 +22,7 @@ class DbHelper {
 
 
     Future<Database> initDb () async {
+
         String dbPath = await getDatabasesPath();
         String path = "${dbPath}userMovies.db";
 
@@ -55,6 +56,14 @@ class DbHelper {
     Future<int> deleteMovieById(List<int> args) async {
         Database db = await _helper.db;
         return await db.delete("user_movies", where: "id = ?", whereArgs: args);
+    }
+
+
+    Future<List> getAllMovies() async {
+        Database db = await _helper.db;
+        var result = await db.rawQuery("SELECT * FROM user_movies");
+
+        return result.toList();
     }
 
 
