@@ -11,21 +11,29 @@ class MovieList extends StatefulWidget {
 
 class _MovieListState extends State<MovieList> {
     
-    late List<Movie> movies;
+    //late List<Movie> movies;
     static DbHelper helper = DbHelper();
+    late Future<List<Movie>> moviesFuture;
 
     @override 
     void initState() {
         super.initState();
-        movies = [Movie(id: 999, name: "teste", date: "1/1/1", rating: 6.7, imgUrl: "aaabbbccc", description: "test movie"),];
-      }
+        moviesFuture = getMovies();
+    }
+
+    Future<List<Movie>> getMovies() async {
+        await Future.delayed(Duration(milliseconds: 500));
+
+        return helper.getAllMovies() as Future<List<Movie>>;
+    }
 
     @override
     Widget build(BuildContext context) {
+
         return Scaffold(
             appBar: AppBar(),
-            body: FutureBuilder(
-                future: helper.getAllMovies(),
+            body: FutureBuilder<List<Movie>>(
+                future: moviesFuture,
                 builder: (context, snapshot){
 
                     if (snapshot.connectionState == ConnectionState.waiting) {
@@ -36,7 +44,9 @@ class _MovieListState extends State<MovieList> {
                     }
                     if (!snapshot.hasData) {
                         return Text("Empty snapshot");
-                    }                
+                    }
+
+                    final movies = snapshot.data ?? [];
 
                     return ListView.builder(
                         itemCount: movies.length,

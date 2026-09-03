@@ -59,7 +59,7 @@ class DbHelper {
     }
 
 
-    Future<List> getAllMovies() async {
+    Future<List<Movie>> getAllMovies() async {
         Database db = await _helper.db;
         var result = await db.rawQuery("SELECT * FROM user_movies");
 
