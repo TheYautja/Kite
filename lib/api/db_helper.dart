@@ -63,7 +63,7 @@ class DbHelper {
         Database db = await _helper.db;
         var result = await db.rawQuery("SELECT * FROM user_movies");
 
-        return result.toList();
+        return result.map((row) => Movie.fromDbResponse(row)).toList();
     }
 
 
