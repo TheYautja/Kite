@@ -49,7 +49,7 @@ class DbHelper {
 
         Map<String, dynamic> row = movie.toJson();
 
-        return await db.insert("user_movies", row);
+        return await db.insert("user_movies", row, conflictAlgorithm: ConflictAlgorithm.replace);
     }
 
 

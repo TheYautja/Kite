@@ -1,7 +1,7 @@
 import "package:flutter/material.dart";
 import "package:kiteapp/common/common.dart";
 import "package:kiteapp/model/movie.dart";
-
+import "package:kiteapp/screens/movie_player.dart";
 
 class PlayButton extends StatelessWidget {
 
