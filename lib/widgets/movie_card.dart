@@ -3,8 +3,10 @@ import 'package:kiteapp/common/common.dart';
 import 'package:kiteapp/model/movie.dart';
 import 'package:kiteapp/screens/movie_player.dart';
 import 'package:kiteapp/widgets/movie_poster.dart';
+import 'package:kiteapp/widgets/play_button.dart';
 import 'package:kiteapp/widgets/rating.dart';
 import 'package:kiteapp/widgets/scrollable_text.dart';
+import 'package:kiteapp/widgets/add_button.dart';
 
 class MovieCard extends StatelessWidget {
     final Movie movie;
@@ -49,18 +51,9 @@ class MovieCard extends StatelessWidget {
                                         children: [
                                             Rating(rating: movie.rating),
                                             const Spacer(),
-                                            IconButton(
-                                                onPressed: () {
-                                                    Navigator.push(context,MaterialPageRoute(builder: (_) => MoviePlayer(movie: movie)));
-                                                },
-                                                icon: const Icon(
-                                                    Icons.play_circle,
-                                                ),
-                                                color: kitePrimary,
-                                                tooltip: 'Watch',
-                                                padding: EdgeInsets.zero,
-                                                constraints: const BoxConstraints(),
-                                            ),
+                                            AddButton(movie: movie),
+                                            const Spacer(),
+                                            PlayButton(movie: movie),
                                         ],
                                     ),
                                 ],
