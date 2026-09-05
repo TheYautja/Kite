@@ -31,7 +31,7 @@ class MovieCard extends StatelessWidget {
                           onTap: (){
                             Navigator.push(context, MaterialPageRoute(builder: (_) => MoviePlayer(movie: movie)));
                           },
-                          child: MoviePoster(path: movie.imgUrl),
+                            child: MoviePoster(path: movie.imgUrl),
                           ),
                     ),
 
@@ -43,7 +43,7 @@ class MovieCard extends StatelessWidget {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
 
-                                    Expanded(child: ScrollableText(text: movie.name)),
+                                    ScrollableText(text: movie.name),
 
                                     const SizedBox(height: 4),
 

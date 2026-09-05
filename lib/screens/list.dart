@@ -1,4 +1,5 @@
 import "package:flutter/material.dart";
+import "package:kiteapp/widgets/carousel_list.dart";
 import "package:kiteapp/widgets/movie_card.dart";
 import "package:kiteapp/model/movie.dart";
 import "package:kiteapp/api/db_helper.dart";
@@ -48,17 +49,8 @@ class _MovieListState extends State<MovieList> {
 
                     final movies = snapshot.data ?? [];
 
-                    return ListView.builder(
-                        itemCount: movies.length,
-                        itemBuilder: (BuildContext context, int index){
-                            return Column(
-                                children: [
-                                    SizedBox(width: 100,height: 100,child: MovieCard(movie: movies[index])), 
-                                ]
-                            );
-                        },
-                    );
-                }
+                    return CarouselList(top: movies, popular: [], upcoming: [],);
+                    }
             )
         
         );

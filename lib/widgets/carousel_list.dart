@@ -6,7 +6,7 @@ class CarouselList extends StatelessWidget {
 
     final List<Movie> top;
     final List<Movie> popular;
-    final List<Movie> upcoming;
+    final List<Movie> upcoming ;
 
     const CarouselList({
         super.key,
