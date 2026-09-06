@@ -3,6 +3,7 @@ import 'package:kiteapp/widgets/bottom_nav.dart';
 import "package:kiteapp/widgets/rating.dart";
 import 'package:webview_flutter/webview_flutter.dart';
 import "package:kiteapp/model/movie.dart";
+import "package:kiteapp/widgets/player.dart";
 
 class MoviePlayer extends StatefulWidget {
   final Movie movie;
@@ -45,7 +46,7 @@ class _MoviePlayerState extends State<MoviePlayer> {
       body: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Expanded(flex: 3, child: WebViewWidget(controller: controller)),
+          Expanded(flex: 3, child: Player(id: widget.movie.id)),
           Expanded(
             flex: 7,
             child: Padding(
