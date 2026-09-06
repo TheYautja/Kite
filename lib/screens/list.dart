@@ -3,6 +3,7 @@ import "package:kiteapp/widgets/carousel_list.dart";
 import "package:kiteapp/widgets/movie_card.dart";
 import "package:kiteapp/model/movie.dart";
 import "package:kiteapp/api/db_helper.dart";
+import "package:kiteapp/widgets/saved_movies.dart";
 
 class MovieList extends StatefulWidget {
 
@@ -49,7 +50,7 @@ class _MovieListState extends State<MovieList> {
 
                     final movies = snapshot.data ?? [];
 
-                    return CarouselList(top: movies, popular: [], upcoming: [],);
+                    return SavedMovies(movies: movies);
                     }
             )
         
