@@ -21,9 +21,9 @@ class Series {
         return Series(
             id: json['id'],
             name: json['name'],
-            seasons: json['seasons'],
-            creator: json['created_by']['name'],
-            first_air_date: json['first_air_date'],
+            seasons: json['seasons'] ?? [],
+            creator: json['created_by']['name'] ?? "Unknown creator",
+            first_air_date: json['first_air_date'] ?? "Unknown air date",
         );
 
     }
@@ -38,7 +38,7 @@ class Season {
     int id,
     String name;
     String overview;
-    String poster_path; //add null check later
+    String poster_path;
     int season_number;
     int vote_average;
 
@@ -58,14 +58,14 @@ class Season {
     factory Season.fromJson(Map<String, dynamic> json){
         
         return Season(
-            air_date: json['air_date'],
-            episode_count: json['episode_count'],
+            air_date: json['air_date'] ?? "Unknown air date",
+            episode_count: json['episode_count'] ?? 0,
             id: json['id'],
             name: json['name'],
-            overview: json['overview'],
-            poster_path: json['poster_path'],
-            season_number: json['season_number'],
-            vote_average: json['vote_average'],
+            overview: json['overview'] ?? "No overview avaliable",
+            poster_path: json['poster_path'] ?? " ",
+            season_number: json['season_number'] ?? 0,
+            vote_average: json['vote_average'] ?? 0,
         );
 
     }
