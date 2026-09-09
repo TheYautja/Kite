@@ -1,4 +1,22 @@
 
+class SeriesResponse {
+
+    List<Series> response;
+
+    SeriesResponse({
+        required this.response,
+    });
+
+    factory SeriesResponse.fromJson(Map<String, dynamic> json){
+        return SeriesResponse(
+            response: List<Series>.from(
+                (json['results'] ?? []).map((x) => Series.fromJson(x)),
+            ), 
+        );
+    }
+
+}
+
 class Series {
     
     int id;
@@ -13,7 +31,7 @@ class Series {
         required this.seasons,
         required this.creator,
         required this.first_air_date,
-    })
+    });
 
 
     factory Series.fromJson(Map<String, dynamic> json){
@@ -35,7 +53,7 @@ class Season {
 
     String air_date;
     int episode_count;
-    int id,
+    int id;
     String name;
     String overview;
     String poster_path;
