@@ -1,7 +1,7 @@
 
 class SeriesResponse {
 
-    List<Series> response;
+    final List<Series> response;
 
     SeriesResponse({
         required this.response,
@@ -19,11 +19,11 @@ class SeriesResponse {
 
 class Series {
     
-    int id;
-    String name;
-    List<Season> seasons;
-    String creator;
-    String first_air_date;
+    final int id;
+    final String name;
+    final List<Season> seasons;
+    final String creator;
+    final String first_air_date;
 
     Series({
         required this.id,
@@ -51,14 +51,14 @@ class Series {
 
 class Season {
 
-    String air_date;
-    int episode_count;
-    int id;
-    String name;
-    String overview;
-    String poster_path;
-    int season_number;
-    int vote_average;
+    final String air_date;
+    final int episode_count;
+    final int id;
+    final String name;
+    final String overview;
+    final String poster_path;
+    final int season_number;
+    final int vote_average;
 
 
     Season({

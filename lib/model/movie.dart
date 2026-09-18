@@ -1,11 +1,11 @@
 class Movie {
-    int id;
-    String name;
-    String imgUrl;
+    final int id;
+    final String name;
+    final String imgUrl;
     //List<int> genre;
-    String date;
-    double rating;
-    String description;
+    final String date;
+    final double rating;
+    final String description;
 
     Movie({
         required this.id,
@@ -43,7 +43,7 @@ class Movie {
            'imgUrl': imgUrl,
            'description': description,
         };
-
+    
     }
 
     factory Movie.fromDbResponse(Map<String, dynamic> res){
