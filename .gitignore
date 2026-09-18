@@ -3,6 +3,7 @@
 *.log
 *.pyc
 *.swp
+*.html
 .DS_Store
 .atom/
 .build/
@@ -12,6 +13,7 @@
 .swiftpm/
 migrate_working_dir/
 .env
+
 
 # IntelliJ related
 *.iml
