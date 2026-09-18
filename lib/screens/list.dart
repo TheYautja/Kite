@@ -26,7 +26,7 @@ class _MovieListState extends State<MovieList> {
     Future<List<Movie>> getMovies() async {
         await Future.delayed(Duration(milliseconds: 500));
 
-        return helper.getAllMovies() as Future<List<Movie>>;
+        return helper.getAllMovies();
     }
 
     @override
