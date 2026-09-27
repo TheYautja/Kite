@@ -1,10 +1,7 @@
 import "package:kiteapp/model/movie.dart";
-
+import "package:kiteapp/api/db_helper.dart";
 
 class CacheManager{
-    
-    List<Movie> cache = [];
-
     
     void cacheMovie(Movie movie){
         cache.add(movie);

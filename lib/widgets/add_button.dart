@@ -15,7 +15,7 @@ class AddButton extends StatelessWidget {
         return IconButton(
             icon: Icon(Icons.add),
             onPressed: (){
-               dbHelper.insertMovie(movie); 
+               dbHelper.insertMovie(movie, "user_movies"); 
             },
             color: kiteAmber,
             padding: EdgeInsets.zero,

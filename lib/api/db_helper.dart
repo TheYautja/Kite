@@ -41,21 +41,33 @@ class DbHelper {
                 description TEXT
             ) 
         ''');
+
+        await db.execute('''
+            CREATE TABLE cached_movies(
+                id INTEGER PRIMARY KEY,
+                name TEXT,
+                date TEXT,
+                rating REAL,
+                imgUrl TEXT,
+                description TEXT,
+                cached_at INTEGER
+            )
+        ''');
     }
 
 
-    Future<int> insertMovie(Movie movie) async {
+    Future<int> insertMovie(Movie movie, String table) async {
         Database db = await _helper.db;
 
         Map<String, dynamic> row = movie.toJson();
 
-        return await db.insert("user_movies", row, conflictAlgorithm: ConflictAlgorithm.replace);
+        return await db.insert(table, row, conflictAlgorithm: ConflictAlgorithm.replace);
     }
 
 
-    Future<int> deleteMovieById(List<int> args) async {
+    Future<int> deleteMovieById(List<int> args, String table) async {
         Database db = await _helper.db;
-        return await db.delete("user_movies", where: "id = ?", whereArgs: args);
+        return await db.delete(table, where: "id = ?", whereArgs: args);
     }
 
 

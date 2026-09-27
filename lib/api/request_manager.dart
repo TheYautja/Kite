@@ -7,8 +7,10 @@ class RequestManager {
 
     late final CacheManager cache;
     late final MovieRequests moviesAPI;
+    late final DbHelper db;
 
-    RequestManager({required this.cache, required this.moviesAPI});
+
+    RequestManager({required this.cache, required this.moviesAPI, required this.db});
 
     
     Future<List<Movie>> getMovies(String requestType){
