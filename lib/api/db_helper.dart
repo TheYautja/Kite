@@ -43,14 +43,10 @@ class DbHelper {
         ''');
 
         await db.execute('''
-            CREATE TABLE cached_movies(
+            CREATE TABLE cache(
                 id INTEGER PRIMARY KEY,
-                name TEXT,
-                date TEXT,
-                rating REAL,
-                imgUrl TEXT,
-                description TEXT,
-                cached_at INTEGER
+                cached_at INTEGER,
+                data TEXT NOT NULL
             )
         ''');
     }
@@ -76,6 +72,42 @@ class DbHelper {
         var result = await db.rawQuery("SELECT * FROM user_movies");
 
         return result.map((row) => Movie.fromDbResponse(row)).toList();
+    }
+
+
+    Future<void> setCache(String key, String data) async {
+        Database db = await _helper.db;
+
+        await db.insert("cache", 
+        {
+            "key": key,
+            "data": data,
+            "cached_at": DateTime.now().millisecondsSinceEpoch,
+        },
+            conflictAlgorithm: ConflictAlgorithm.replace,
+        );
+    }
+
+
+    Future<String?> getCache(String key, {Duration ttl = const Duration(hours: 6),}) async {
+        Database db = await _helper.db;
+
+        final result = await db.query(
+            "cache",
+            where: "key = ?",
+            whereArgs: [key],
+            limit: 1,
+        );
+
+        if(result.isEmpty) return null;
+
+        final row = result.first;
+
+        final cachedAt = DateTime.fromMillisecondsSinceEpoch(row["cached_at"] as int,);
+
+        if(DateTime.now().difference(cachedAt) > ttl) return null;
+        
+        return row["data"] as String;
     }
 
 

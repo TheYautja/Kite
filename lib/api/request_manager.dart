@@ -1,3 +1,4 @@
+import "package:kiteapp/api/db_helper.dart";
 import "package:kiteapp/api/movie_requests.dart";
 import "package:kiteapp/api/cache_manager.dart";
 import "package:kiteapp/model/movie.dart";
@@ -5,12 +6,9 @@ import "package:kiteapp/model/movie.dart";
 
 class RequestManager {
 
-    late final CacheManager cache;
-    late final MovieRequests moviesAPI;
-    late final DbHelper db;
-
-
-    RequestManager({required this.cache, required this.moviesAPI, required this.db});
+    final CacheManager cache = CacheManager();
+    final MovieRequests moviesAPI = MovieRequests();
+    final DbHelper db = DbHelper(); 
 
     
     Future<List<Movie>> getMovies(String requestType){
