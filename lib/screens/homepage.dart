@@ -1,6 +1,6 @@
 import "package:flutter/material.dart";
+import "package:kiteapp/api/request_manager.dart";
 import "package:kiteapp/screens/tmdb_search.dart";
-import "package:kiteapp/api/movie_requests.dart";
 import "package:kiteapp/widgets/bottom_nav.dart";
 import "package:kiteapp/model/movie.dart";
 import "package:kiteapp/widgets/carousel_list.dart";
@@ -15,7 +15,7 @@ class Homepage extends StatefulWidget {
 class _HomepageState extends State<Homepage> {
 
 
-    MovieRequests api = MovieRequests();
+    RequestManager api = RequestManager();
     late Future<List<List<Movie>>> movies;
 
     @override 

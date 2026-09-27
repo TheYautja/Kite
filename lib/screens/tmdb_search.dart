@@ -1,4 +1,5 @@
 import "package:flutter/material.dart";
+import "package:kiteapp/api/request_manager.dart";
 import "package:kiteapp/api/movie_requests.dart";
 import "package:kiteapp/model/movie.dart";
 import "package:kiteapp/widgets/movie_card.dart";
@@ -13,6 +14,7 @@ class TmdbSearchPage extends StatefulWidget {
 class _TmdbSearchPageState extends State<TmdbSearchPage> {
 
     final api = MovieRequests();
+    final cache = RequestManager();
     final TextEditingController _searchController = TextEditingController();
     late Future<List<Movie>> results;
 
@@ -20,7 +22,7 @@ class _TmdbSearchPageState extends State<TmdbSearchPage> {
     @override
       void initState() {
         super.initState();
-        results = api.getMovies("upcoming");
+        results = cache.getMovies("upcoming");
       }
 
 
