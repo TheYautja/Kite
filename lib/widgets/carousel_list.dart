@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kiteapp/model/movie.dart';
+import 'package:kiteapp/common/common.dart';
 import 'package:kiteapp/widgets/movie_card.dart';
 
 class CarouselList extends StatelessWidget {
@@ -20,7 +21,10 @@ class CarouselList extends StatelessWidget {
         return Expanded(
             child: ListView(
                 children: [
-                    const Text("Top Rated"),
+                    const Text(
+                        "Top Rated",
+                        style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: kiteSurface),
+                    ),
 
                     SizedBox(
                         height: 250,
@@ -33,7 +37,10 @@ class CarouselList extends StatelessWidget {
                         ),
                     ),
 
-                    const Text("Popular"),
+                    const Text(
+                        "Popular",
+                        style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: kiteSurface),
+                    ),
 
                     SizedBox(
                         height: 250,
@@ -46,7 +53,10 @@ class CarouselList extends StatelessWidget {
                         ),
                     ),
 
-                    const Text("Upcoming"),
+                    const Text(
+                        "Upcoming",
+                        style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: kiteSurface),
+                    ),
 
                     SizedBox(
                         height: 250,
