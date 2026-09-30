@@ -26,7 +26,7 @@ class Movie {
             imgUrl: json['poster_path'] != null ? "https://tmdb.org/t/p/w500${json['poster_path']}" : " ",
             //genre: List<int>.from(json['genre_ids'] ?? []),
             date: json['release_date'] ?? "Unknown",
-            rating: json['vote_average'].toDouble(),
+            rating: json['vote_average'] != null ? json['vote_average'].toDouble() : 0.0,
             description: json['overview'] ?? "No overview avaliable",
         );
 
@@ -46,17 +46,15 @@ class Movie {
     
     }
 
-    factory Movie.fromDbResponse(Map<String, dynamic> res){
-        
+    factory Movie.fromDbResponse(Map<String, dynamic> res) {
         return Movie(
-            id: res['id'],
-            name: res['name'],
-            imgUrl: res['imgUrl'],
-            rating: res['rating'],
-            description: res['description'],
-            date: res['date'],
+            id: (res["id"] as num?)?.toInt() ?? 0,
+            name: res["name"] as String? ?? "Unknown",
+            imgUrl: res["imgUrl"] as String? ?? "",
+            date: res["date"] as String? ?? "Unknown",
+            rating: (res["rating"] as num?)?.toDouble() ?? 0.0,
+            description: res["description"] as String? ?? "No overview available",
         );
-
     }
 
 }

@@ -24,7 +24,7 @@ class DbHelper {
     Future<Database> initDb () async {
 
         String dbPath = await getDatabasesPath();
-        String path = "${dbPath}userMovies.db";
+        String path = "$dbPath/userMovies.db";
 
         return await openDatabase(path, version: 1, onCreate: _onCreate);
     }
@@ -44,7 +44,7 @@ class DbHelper {
 
         await db.execute('''
             CREATE TABLE cache(
-                id INTEGER PRIMARY KEY,
+                key TEXT PRIMARY KEY,
                 cached_at INTEGER,
                 data TEXT NOT NULL
             )
