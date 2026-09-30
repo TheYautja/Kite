@@ -70,8 +70,8 @@ class _HomepageState extends State<Homepage> {
     Future<List<List<Movie>>> loadAllMovies() async {
 
         final results = await Future.wait([
-            api.getMovies("popular"),
             api.getMovies("top_rated"),
+            api.getMovies("popular"),
             api.getMovies("upcoming"),
         ]);
 
