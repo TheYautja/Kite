@@ -21,18 +21,13 @@ class DbHelper {
     }
 
 
-Future<Database> initDb() async {
-    final dbPath = await getDatabasesPath();
-    final path = "$dbPath/userMovies.db";
+    Future<Database> initDb () async {
 
-    print("DB PATH: $path");
+        String dbPath = await getDatabasesPath();
+        String path = "$dbPath/userMovies.db";
 
-    return await openDatabase(
-        path,
-        version: 1,
-        onCreate: _onCreate,
-    );
-}
+        return await openDatabase(path, version: 1, onCreate: _onCreate);
+    }
 
 
     Future _onCreate(Database db, int version) async {

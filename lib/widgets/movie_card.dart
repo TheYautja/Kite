@@ -20,7 +20,7 @@ class MovieCard extends StatelessWidget {
             child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                    Expanded(flex: 7, child: ClickablePoster(movie: movie)),
+                    Expanded(flex: 6, child: ClickablePoster(movie: movie)),
                     Expanded(flex: 3, child: CardBottom(movie: movie)),
                 ],
             ),

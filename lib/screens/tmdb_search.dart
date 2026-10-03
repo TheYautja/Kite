@@ -49,10 +49,10 @@ class _TmdbSearchPageState extends State<TmdbSearchPage> {
                 future: results,
                 builder: (context, snapshot){
                     if(snapshot.connectionState == ConnectionState.waiting){
-                        return CircularProgressIndicator();
+                        return Center(child: CircularProgressIndicator());
                     }
                     if(snapshot.connectionState == ConnectionState.none){
-                        return Text("connection failed");
+                        return Center(child: Text("connection failed"));
                     }
                     if(!snapshot.hasData){
                         return Center(child: Text("No results found"));
