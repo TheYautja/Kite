@@ -27,7 +27,7 @@ class CarouselList extends StatelessWidget {
                     ),
 
                     SizedBox(
-                        height: 250,
+                        height: 280,
                         child: ListView(
                             scrollDirection: Axis.horizontal,
                             itemExtent: 150,
@@ -43,7 +43,7 @@ class CarouselList extends StatelessWidget {
                     ),
 
                     SizedBox(
-                        height: 250,
+                        height: 280,
                         child: ListView(
                             scrollDirection: Axis.horizontal,
                             itemExtent: 150,
@@ -59,7 +59,7 @@ class CarouselList extends StatelessWidget {
                     ),
 
                     SizedBox(
-                        height: 250,
+                        height: 280,
                         child: ListView(
                             scrollDirection: Axis.horizontal,
                             itemExtent: 150,
