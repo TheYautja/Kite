@@ -30,7 +30,7 @@ class CarouselList extends StatelessWidget {
                         height: 300,
                         child: ListView(
                             scrollDirection: Axis.horizontal,
-                            itemExtent: 180,
+                            itemExtent: 150,
                             children: top.map((movie) {
                                 return MovieCard(movie: movie);
                             }).toList(),
@@ -46,7 +46,7 @@ class CarouselList extends StatelessWidget {
                         height: 300,
                         child: ListView(
                             scrollDirection: Axis.horizontal,
-                            itemExtent: 180,
+                            itemExtent: 150,
                             children: popular.map((movie) {
                                 return MovieCard(movie: movie);
                             }).toList(),
@@ -62,7 +62,7 @@ class CarouselList extends StatelessWidget {
                         height: 300,
                         child: ListView(
                             scrollDirection: Axis.horizontal,
-                            itemExtent: 180,
+                            itemExtent: 150,
                             children: upcoming.map((movie) {
                                 return MovieCard(movie: movie);
                             }).toList(),

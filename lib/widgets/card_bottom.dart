@@ -19,14 +19,12 @@ class CardBottom extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                     ScrollableText(text: movie.name),
-                    const SizedBox(height: 4),
                     Row(
                         children: [
                             Rating(rating: movie.rating),
-                            const Spacer(),
                             AddButton(movie: movie),
-                            const Spacer(),
                             PlayButton(movie: movie),
+                            const Spacer(),
                         ],
                     ),
                 ],

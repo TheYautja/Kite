@@ -10,15 +10,17 @@ class AddButton extends StatelessWidget {
 
     AddButton({required this.movie}); 
 
+    SnackBar snackBar = SnackBar(content: Text("added to the library"));
+
     @override 
     Widget build(BuildContext context){
         return IconButton(
             icon: Icon(Icons.add),
             onPressed: (){
-               dbHelper.insertMovie(movie, "user_movies"); 
+               dbHelper.insertMovie(movie, "user_movies");
+               ScaffoldMessenger.of(context).showSnackBar(snackBar);
             },
             color: kiteAmber,
-            padding: EdgeInsets.zero,
             tooltip: "add to list",
             constraints: const BoxConstraints(),
         );

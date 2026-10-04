@@ -22,7 +22,7 @@ class _TmdbSearchPageState extends State<TmdbSearchPage> {
     @override
       void initState() {
         super.initState();
-        results = cache.getMovies("upcoming");
+        results = cache.getMovies("none");
       }
 
 
