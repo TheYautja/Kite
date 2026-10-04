@@ -2,6 +2,7 @@ import "package:flutter/material.dart";
 import "package:kiteapp/common/common.dart";
 import "package:kiteapp/screens/homepage.dart";
 import "package:kiteapp/screens/list.dart";
+import "package:kiteapp/screens/user_profile.dart";
 
 class BottomNav extends StatelessWidget {
   @override
@@ -38,7 +39,7 @@ class BottomNav extends StatelessWidget {
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => Text("later")),
+                  MaterialPageRoute(builder: (context) => UserProfile()),
                 );
               },
             ),

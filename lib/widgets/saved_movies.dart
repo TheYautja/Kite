@@ -13,16 +13,15 @@ class SavedMovies extends StatelessWidget {
         return Expanded(
             child: Column(
                 children: [
-                    Text("local movies"),
                     Flexible(
                         child: SizedBox( 
                             child: GridView(
                                 gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
                                     crossAxisCount: 3,
-                                    childAspectRatio: 0.65,
+                                    childAspectRatio: 0.5,
                                 ),
                                 children: movies.map((movie) {
-                                    return MovieCard(movie: movie);
+                                    return SizedBox(height: 300, child: MovieCard(movie: movie),);
                                 }).toList(),
                             ),
                         ),

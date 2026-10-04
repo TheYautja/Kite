@@ -24,7 +24,6 @@ class CardBottom extends StatelessWidget {
                             Rating(rating: movie.rating),
                             AddButton(movie: movie),
                             PlayButton(movie: movie),
-                            const Spacer(),
                         ],
                     ),
                 ],
