@@ -13,16 +13,19 @@ class MovieCard extends StatelessWidget {
 
     @override
     Widget build(BuildContext context) {
-        return Card(
-            color: kiteSurface,
-            elevation: 4,
-            clipBehavior: Clip.antiAlias,
-            child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                    Expanded(flex: 5, child: ClickablePoster(movie: movie)),
-                    Expanded(flex: 2, child: CardBottom(movie: movie)),
-                ],
+        return Container(
+            height: 285,
+            child: Card(
+                color: kiteSurface,
+                elevation: 4,
+                clipBehavior: Clip.antiAlias,
+                child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                        Expanded(flex: 5, child: ClickablePoster(movie: movie)),
+                        Expanded(flex: 2, child: CardBottom(movie: movie)),
+                    ],
+                ),
             ),
         );
     }

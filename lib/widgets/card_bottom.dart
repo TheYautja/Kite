@@ -23,6 +23,7 @@ class CardBottom extends StatelessWidget {
                         children: [
                             Rating(rating: movie.rating),
                             AddButton(movie: movie),
+                            Spacer(),
                             PlayButton(movie: movie),
                         ],
                     ),

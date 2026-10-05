@@ -13,7 +13,7 @@ class ScrollableText extends StatelessWidget{
     Widget build(BuildContext context) {
 
         return SizedBox(
-          height: 24,
+          height: 16,
           width: double.infinity,
           child: AutoSizeText(
               text,

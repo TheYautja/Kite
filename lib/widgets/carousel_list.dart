@@ -27,10 +27,10 @@ class CarouselList extends StatelessWidget {
                     ),
 
                     SizedBox(
-                        height: 300,
+                        height: 285,
                         child: ListView(
                             scrollDirection: Axis.horizontal,
-                            itemExtent: 150,
+                            itemExtent: 170,
                             children: top.map((movie) {
                                 return MovieCard(movie: movie);
                             }).toList(),
@@ -43,10 +43,10 @@ class CarouselList extends StatelessWidget {
                     ),
 
                     SizedBox(
-                        height: 300,
+                        height: 285,
                         child: ListView(
                             scrollDirection: Axis.horizontal,
-                            itemExtent: 150,
+                            itemExtent: 170,
                             children: popular.map((movie) {
                                 return MovieCard(movie: movie);
                             }).toList(),
@@ -59,10 +59,10 @@ class CarouselList extends StatelessWidget {
                     ),
 
                     SizedBox(
-                        height: 300,
+                        height: 285,
                         child: ListView(
                             scrollDirection: Axis.horizontal,
-                            itemExtent: 150,
+                            itemExtent: 170,
                             children: upcoming.map((movie) {
                                 return MovieCard(movie: movie);
                             }).toList(),

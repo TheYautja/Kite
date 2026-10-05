@@ -54,25 +54,21 @@ class _TmdbSearchPageState extends State<TmdbSearchPage> {
                     if(snapshot.connectionState == ConnectionState.none){
                         return Center(child: Text("connection failed"));
                     }
+
                     if(!snapshot.hasData){
                         return Center(child: Text("No results found"));
                     }
 
                     List<Movie> movieList = snapshot.data!;
                     
-                    return GridView.builder(
-                        padding: const EdgeInsets.all(8),
-                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: 2,
-                            mainAxisSpacing: 8,
-                            crossAxisSpacing: 8,
-                        ),
-                        itemCount: movieList.length,
-                        itemBuilder: (context, index){
-                            return MovieCard(movie: movieList[index]);
-                        }
-                    );
-
+                    return GridView.extent(
+                        maxCrossAxisExtent: 300,
+                        mainAxisExtent: 290,
+                        mainAxisSpacing: 10.0,
+                        children: movieList.map((movie) {
+                            return MovieCard(movie: movie);
+                        }).toList(),
+                    ); 
                 },
             ) 
         );

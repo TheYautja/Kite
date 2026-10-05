@@ -2,6 +2,8 @@ import "package:flutter/material.dart";
 import "package:kiteapp/model/movie.dart";
 import "package:webview_flutter/webview_flutter.dart";
 
+
+//only works on Android for now, webview_flutter is platform specific
 class Player extends StatelessWidget {
     
     late final int id;
