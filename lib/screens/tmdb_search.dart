@@ -62,7 +62,7 @@ class _TmdbSearchPageState extends State<TmdbSearchPage> {
                     List<Movie> movieList = snapshot.data!;
                     
                     return GridView.extent(
-                        maxCrossAxisExtent: 300,
+                        maxCrossAxisExtent: 250,
                         mainAxisExtent: 290,
                         mainAxisSpacing: 10.0,
                         children: movieList.map((movie) {
