@@ -3,6 +3,7 @@ import "package:kiteapp/api/request_manager.dart";
 import "package:kiteapp/api/movie_requests.dart";
 import "package:kiteapp/model/movie.dart";
 import "package:kiteapp/widgets/movie_card.dart";
+import "package:kiteapp/widgets/saved_movies.dart";
 
 class TmdbSearchPage extends StatefulWidget {
   const TmdbSearchPage({super.key});
@@ -51,6 +52,7 @@ class _TmdbSearchPageState extends State<TmdbSearchPage> {
                     if(snapshot.connectionState == ConnectionState.waiting){
                         return Center(child: CircularProgressIndicator());
                     }
+
                     if(snapshot.connectionState == ConnectionState.none){
                         return Center(child: Text("connection failed"));
                     }
@@ -61,14 +63,7 @@ class _TmdbSearchPageState extends State<TmdbSearchPage> {
 
                     List<Movie> movieList = snapshot.data!;
                     
-                    return GridView.extent(
-                        maxCrossAxisExtent: 250,
-                        mainAxisExtent: 290,
-                        mainAxisSpacing: 10.0,
-                        children: movieList.map((movie) {
-                            return MovieCard(movie: movie);
-                        }).toList(),
-                    ); 
+                    return SavedMovies(movies: movieList);
                 },
             ) 
         );
