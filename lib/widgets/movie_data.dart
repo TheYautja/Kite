@@ -24,7 +24,7 @@ class MovieData extends StatelessWidget {
                         movie.date.toString(),
                         style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
                     ),
-                    Rating(rating: movie.rating),
+                    Rating(rating: movie.rating, colorParam: "black"),
                     Text(movie.description),
                     Spacer(),
                 ],

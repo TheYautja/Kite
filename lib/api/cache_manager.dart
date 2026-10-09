@@ -20,7 +20,7 @@ class CacheManager {
         return results
         .map(
             (item) => Movie.fromDbResponse(
-            item as Map<String, dynamic>,
+                item as Map<String, dynamic>,
             ),
         ).toList();
     }

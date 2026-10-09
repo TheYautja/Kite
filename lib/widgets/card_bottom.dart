@@ -21,7 +21,7 @@ class CardBottom extends StatelessWidget {
                     ScrollableText(text: movie.name),
                     Row(
                         children: [
-                            Rating(rating: movie.rating),
+                            Rating(rating: movie.rating, colorParam: "white",),
                             AddButton(movie: movie),
                             Spacer(),
                             PlayButton(movie: movie),

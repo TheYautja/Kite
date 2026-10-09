@@ -22,7 +22,7 @@ class MoviePlayer extends StatelessWidget {
                     Expanded(flex: 7, child: MovieData(movie: movie)),
                 ],
             ),
-            bottomSheet: BottomNav(),
+            bottomNavigationBar: BottomNav(),
         );
     }
 }

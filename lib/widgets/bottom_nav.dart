@@ -3,6 +3,7 @@ import "package:kiteapp/common/common.dart";
 import "package:kiteapp/screens/homepage.dart";
 import "package:kiteapp/screens/list.dart";
 import "package:kiteapp/screens/user_profile.dart";
+import "package:kiteapp/screens/config.dart";
 
 class BottomNav extends StatelessWidget {
   @override
@@ -14,34 +15,44 @@ class BottomNav extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             IconButton(
-              color: kiteText,
-              icon: Icon(Icons.home),
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => Homepage()),
-                );
-              },
+                color: kiteText,
+                icon: Icon(Icons.home),
+                onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => Homepage()),
+                    );
+                },
             ),
             IconButton(
-              color: kiteText,
-              icon: Icon(Icons.list),
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => MovieList()),
-                );
-              },
+                color: kiteText,
+                icon: Icon(Icons.list),
+                onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => MovieList()),
+                    );
+                },
             ),
             IconButton(
-              color: kiteText,
-              icon: Icon(Icons.person),
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => UserProfile()),
-                );
-              },
+                color: kiteText,
+                icon: Icon(Icons.settings),
+                onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => Config()),
+                    );
+                },
+            ),
+            IconButton(
+                color: kiteText,
+                icon: Icon(Icons.person),
+                onPressed: (){
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => UserProfile()),
+                    );
+                },
             ),
           ],
         ),
