@@ -1,9 +1,14 @@
 import "package:flutter/material.dart";
 import "package:kiteapp/common/common.dart";
 import "package:kiteapp/widgets/bottom_nav.dart";
+import "package:kiteapp/widgets/config_option.dart";
 
 class Config extends StatelessWidget {
     
+    void test(){
+        print("clciked");
+    }
+
     @override
     Widget build(BuildContext context){
         
@@ -14,29 +19,38 @@ class Config extends StatelessWidget {
                 children: [
                     SizedBox(width: double.infinity),
                     Text("Settings"),
-                    Card(
-                        color: kitePrimaryLight,
-                        child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                                Text("Appearance"),
-                                ElevatedButton(onPressed: (){}, child: Text("a")),
-                                ElevatedButton(onPressed: (){}, child: Text("b")),
-                                ElevatedButton(onPressed: (){}, child: Text("c")),
-                            ],
+                    Expanded(
+                        child: Card(
+                            color: kiteTextSecondary,
+                            child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                    Text("Appearance"),
+                                    Spacer(),
+                                    ConfigOption(title: "Colorscheme", onClick: test,),
+                                    ConfigOption(title: "Colorscheme", onClick: test,),
+                                    ConfigOption(title: "Colorscheme", onClick: test,),
+                                    Spacer(),
+                                ],
+                            ),
                         ),
                     ),
-                    Card(
-                        color: kiteSurfaceLight,
-                        child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.center,
-                            children: [
-                                Text("Lists"),
-                                ElevatedButton(onPressed: (){}, child: Text("Export list to file")),
-                                ElevatedButton(onPressed: (){}, child: Text("Import list from file")),
-                            ],
+                    Expanded(
+                        child: Card(
+                            color: kiteTextSecondary,
+                            child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                children: [
+                                    Text("Lists"),
+                                    ConfigOption(title: "Export list to file", onClick: test,),
+                                    ConfigOption(title: "Import list from file", onClick: test,),
+                                    ConfigOption(title: "Change movie data provider", onClick: test,),
+                                    Spacer(),
+                                ],
+                            ),
                         ),
                     ),
+                    Spacer(),
                 ],
             ),
             bottomNavigationBar: BottomNav(),
