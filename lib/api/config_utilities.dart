@@ -10,17 +10,16 @@ class ConfigUtils {
         await file.writeAsString(contents);
     }
 
-    Future<String> _read(String filename) async {
-        late String text;
+    void _read(String filename) async {
         try {
             final Directory dir = await getApplicationDocumentsDirectory();
             final File file = File('${dir}/${filename}.txt');
-            text = await file.readAsString();
+            final String text = await file.readAsString();
+            //parse and write to db
         }
         catch (e) {
             print("could not read file");
         }
-        return text;
     }
 
     void exportToFile(String filename) async {

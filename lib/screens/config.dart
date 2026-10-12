@@ -8,10 +8,6 @@ class Config extends StatelessWidget {
     
     ConfigUtils utils = ConfigUtils();
 
-    void test(){
-        print("clciked");
-    }
-
     @override
     Widget build(BuildContext context){
         
@@ -28,9 +24,9 @@ class Config extends StatelessWidget {
                             child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
-                                    ConfigOption(title: "Export list to file", onClick: utils.exportToFile("test"),),
-                                    ConfigOption(title: "Import list from file", onClick: test,),
-                                    ConfigOption(title: "Change movie data provider", onClick: test,),
+                                    ConfigOption(title: "Export list to file", onClick: utils.exportToFile, args: "test"),
+                                    ConfigOption(title: "Import list from file", onClick: utils.exportToFile, args: "test"),
+                                    ConfigOption(title: "Change movie data provider", onClick: utils.exportToFile, args: "test"),
                                     Spacer(),
                                 ],
                             ),
