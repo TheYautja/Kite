@@ -28,12 +28,13 @@ class CarouselList extends StatelessWidget {
 
                     SizedBox(
                         height: 285,
-                        child: ListView(
+                        child: ListView.builder(
                             scrollDirection: Axis.horizontal,
                             itemExtent: 170,
-                            children: top.map((movie) {
-                                return MovieCard(movie: movie);
-                            }).toList(),
+                            itemCount: top.length,
+                            itemBuilder: (context, index){
+                                return MovieCard(movie: top[index]);
+                            }, 
                         ),
                     ),
 
@@ -44,12 +45,13 @@ class CarouselList extends StatelessWidget {
 
                     SizedBox(
                         height: 285,
-                        child: ListView(
+                        child: ListView.builder(
                             scrollDirection: Axis.horizontal,
                             itemExtent: 170,
-                            children: popular.map((movie) {
-                                return MovieCard(movie: movie);
-                            }).toList(),
+                            itemCount: popular.length,
+                            itemBuilder: (context, index){
+                                return MovieCard(movie: popular[index]);
+                            }
                         ),
                     ),
 
@@ -60,12 +62,13 @@ class CarouselList extends StatelessWidget {
 
                     SizedBox(
                         height: 285,
-                        child: ListView(
+                        child: ListView.builder(
                             scrollDirection: Axis.horizontal,
                             itemExtent: 170,
-                            children: upcoming.map((movie) {
-                                return MovieCard(movie: movie);
-                            }).toList(),
+                            itemCount: upcoming.length,
+                            itemBuilder: (context, index){
+                                return MovieCard(movie: upcoming[index]);
+                            },
                         ),
                     ),
                 ],
