@@ -2,9 +2,12 @@ import "package:flutter/material.dart";
 import "package:kiteapp/common/common.dart";
 import "package:kiteapp/widgets/bottom_nav.dart";
 import "package:kiteapp/widgets/config_option.dart";
+import "package:kiteapp/api/config_utilities.dart";
 
 class Config extends StatelessWidget {
     
+    ConfigUtils utils = ConfigUtils();
+
     void test(){
         print("clciked");
     }
@@ -18,31 +21,14 @@ class Config extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                     SizedBox(width: double.infinity),
-                    Text("Settings"),
+                    Text("Settings"), 
                     Expanded(
                         child: Card(
                             color: kiteTextSecondary,
                             child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.center,
                                 children: [
-                                    Text("Appearance"),
-                                    Spacer(),
-                                    ConfigOption(title: "Colorscheme", onClick: test,),
-                                    ConfigOption(title: "Colorscheme", onClick: test,),
-                                    ConfigOption(title: "Colorscheme", onClick: test,),
-                                    Spacer(),
-                                ],
-                            ),
-                        ),
-                    ),
-                    Expanded(
-                        child: Card(
-                            color: kiteTextSecondary,
-                            child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.center,
-                                children: [
-                                    Text("Lists"),
-                                    ConfigOption(title: "Export list to file", onClick: test,),
+                                    ConfigOption(title: "Export list to file", onClick: utils.exportToFile("test"),),
                                     ConfigOption(title: "Import list from file", onClick: test,),
                                     ConfigOption(title: "Change movie data provider", onClick: test,),
                                     Spacer(),

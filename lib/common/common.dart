@@ -9,3 +9,5 @@ const Color kiteText          = Color(0xFFF5F5F5);
 const Color kiteTextSecondary = Color(0xFFA1A1AA);
 const Color kiteAmber         = Color(0xFFFBBF24);
 const Color kiteError         = Color(0xFFEF4444);
+
+typedef 
