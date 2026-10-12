@@ -21,6 +21,8 @@ class MoviePoster extends StatelessWidget{
             path,
             width: double.infinity,
             fit: BoxFit.cover,
+            cacheWidth: 342,
+            filterQuality: FilterQuality.low,
             loadingBuilder: (
                 context,
                 child,

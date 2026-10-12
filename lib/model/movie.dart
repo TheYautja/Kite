@@ -23,7 +23,7 @@ class Movie {
         return Movie(
             id: json['id'] ?? 0,
             name: json['title'] ?? "Unknown",
-            imgUrl: json['poster_path'] != null ? "https://tmdb.org/t/p/w500${json['poster_path']}" : " ",
+            imgUrl: json['poster_path'] != null ? "https://tmdb.org/t/p/w342${json['poster_path']}" : " ",
             //genre: List<int>.from(json['genre_ids'] ?? []),
             date: json['release_date'] ?? "Unknown",
             rating: json['vote_average'] != null ? json['vote_average'].toDouble() : 0.0,
