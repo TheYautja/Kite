@@ -262,7 +262,7 @@ class _HomepageState extends State<Homepage> {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (_) => const TmdbSearchPage(initialSeries: showSeries,),
+                                    builder: (_) => TmdbSearchPage(initialSeries: showSeries,),
                                 ),
                             );
                         },
