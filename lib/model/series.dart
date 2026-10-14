@@ -44,6 +44,23 @@ class Series {
         );
     }
 
+    
+    factory Series.fromDbResponse(Map<String, dynamic> json) {
+        return Series(
+            id: (json['id'] as num?)?.toInt() ?? 0,
+            name: json['name'] as String? ?? 'Unknown',
+            imgUrl: json['imgUrl'] as String? ?? '',
+            date: json['date'] as String? ?? 'Unknown',
+            rating: (json['rating'] as num?)?.toDouble() ?? 0.0,
+            description: json['description'] as String? ?? '',
+            creator: json['creator'] as String? ?? 'Unknown creator',
+            seasons: (json['seasons'] as List<dynamic>? ?? []).map((item) {
+                return Season.fromJson(item as Map<String, dynamic>);
+            }).toList(),
+        );
+    }
+
+
     Map<String, dynamic> toJson() {
         return {
             'id': id,
