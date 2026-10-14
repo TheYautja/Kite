@@ -8,8 +8,7 @@ import "package:kiteapp/screens/config.dart";
 class BottomNav extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: Container(
+    return Container(
         color: kiteSurface,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -56,7 +55,6 @@ class BottomNav extends StatelessWidget {
             ),
           ],
         ),
-      ),
-    );
+      );
   }
 }
