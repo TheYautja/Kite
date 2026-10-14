@@ -34,6 +34,27 @@ class SeriesRequests {
             throw Exception("${response.statusCode}");
         }
     }
+    
+    
+    Future<Series> getDetails(int id) async {
+        final response = await http.get(
+            Uri.parse('$baseUrl$id'),
+            headers: {
+                'Authorization': 'Bearer $ACCESS_TOKEN',
+                'Accept': 'application/json',
+            },
+        );
+
+        if (response.statusCode != 200) {
+            throw Exception(
+                'Failed to fetch series details: ${response.statusCode}',
+            );
+        }
+
+        return Series.fromJson(
+            jsonDecode(response.body) as Map<String, dynamic>,
+        );
+    }
 
 
     Future<List<Series>> searchByName(String name) async {
