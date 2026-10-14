@@ -1,4 +1,5 @@
 
+
 import 'package:flutter/material.dart';
 import 'package:kiteapp/common/common.dart';
 import 'package:kiteapp/model/movie.dart';
@@ -29,9 +30,10 @@ class CarouselList extends StatelessWidget {
 
     Widget buildSection(
         String title,
-        int count,
-        Widget Function(int) itemBuilder,
+        List<Widget> cards,
     ) {
+        if (cards.isEmpty) return const SizedBox.shrink();
+
         return Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -52,9 +54,9 @@ class CarouselList extends StatelessWidget {
                         padding: const EdgeInsets.symmetric(horizontal: 12),
                         scrollDirection: Axis.horizontal,
                         itemExtent: 170,
-                        itemCount: count,
+                        itemCount: cards.length,
                         itemBuilder: (context, index) {
-                            return itemBuilder(index);
+                            return cards[index];
                         },
                     ),
                 ),
@@ -64,54 +66,54 @@ class CarouselList extends StatelessWidget {
 
     @override
     Widget build(BuildContext context) {
+        final sections = showSeries
+            ? [
+                (
+                    'Top Rated',
+                    topSeries.map((series) {
+                        return MovieCard(series: series);
+                    }).toList(),
+                ),
+                (
+                    'Popular',
+                    popularSeries.map((series) {
+                        return MovieCard(series: series);
+                    }).toList(),
+                ),
+                (
+                    'On The Air',
+                    airingSeries.map((series) {
+                        return MovieCard(series: series);
+                    }).toList(),
+                ),
+            ]
+            : [
+                (
+                    'Top Rated',
+                    top.map((movie) {
+                        return MovieCard(movie: movie);
+                    }).toList(),
+                ),
+                (
+                    'Popular',
+                    popular.map((movie) {
+                        return MovieCard(movie: movie);
+                    }).toList(),
+                ),
+                (
+                    'Upcoming',
+                    upcoming.map((movie) {
+                        return MovieCard(movie: movie);
+                    }).toList(),
+                ),
+            ];
+
         return ListView(
-            children: showSeries
-                ? [
-                    buildSection(
-                        'Top Rated',
-                        topSeries.length,
-                        (index) => MovieCard(
-                            series: topSeries[index],
-                        ),
-                    ),
-                    buildSection(
-                        'Popular',
-                        popularSeries.length,
-                        (index) => MovieCard(
-                            series: popularSeries[index],
-                        ),
-                    ),
-                    buildSection(
-                        'On The Air',
-                        airingSeries.length,
-                        (index) => MovieCard(
-                            series: airingSeries[index],
-                        ),
-                    ),
-                ]
-                : [
-                    buildSection(
-                        'Top Rated',
-                        top.length,
-                        (index) => MovieCard(
-                            movie: top[index],
-                        ),
-                    ),
-                    buildSection(
-                        'Popular',
-                        popular.length,
-                        (index) => MovieCard(
-                            movie: popular[index],
-                        ),
-                    ),
-                    buildSection(
-                        'Upcoming',
-                        upcoming.length,
-                        (index) => MovieCard(
-                            movie: upcoming[index],
-                        ),
-                    ),
-                ],
+            padding: const EdgeInsets.only(bottom: 20),
+            children: [
+                for (final section in sections)
+                    buildSection(section.$1, section.$2),
+            ],
         );
     }
 }
