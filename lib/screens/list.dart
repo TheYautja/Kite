@@ -35,7 +35,10 @@ class _MovieListState extends State<MovieList> {
 
         return Scaffold(
             backgroundColor: kiteBackground,
-            appBar: AppBar(),
+            appBar: AppBar(
+                backgroundColor: kiteSurface,
+                foregroundColor: kiteText,
+            ),
             body: FutureBuilder<List<Movie>>(
                 future: moviesFuture,
                 builder: (context, snapshot){
