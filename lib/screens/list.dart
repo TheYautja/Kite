@@ -1,4 +1,5 @@
 import "package:flutter/material.dart";
+import "package:kiteapp/common/common.dart";
 import "package:kiteapp/widgets/bottom_nav.dart";
 import "package:kiteapp/model/movie.dart";
 import "package:kiteapp/api/db_helper.dart";
@@ -33,6 +34,7 @@ class _MovieListState extends State<MovieList> {
     Widget build(BuildContext context) {
 
         return Scaffold(
+            backgroundColor: kiteBackground,
             appBar: AppBar(),
             body: FutureBuilder<List<Movie>>(
                 future: moviesFuture,

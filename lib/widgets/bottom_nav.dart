@@ -42,18 +42,8 @@ class BottomNav extends StatelessWidget {
                         MaterialPageRoute(builder: (context) => Config()),
                     );
                 },
-            ),
-            IconButton(
-                color: kiteText,
-                icon: Icon(Icons.person),
-                onPressed: (){
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(builder: (context) => UserProfile()),
-                    );
-                },
-            ),
-          ],
+            ),         
+            ],
         ),
       );
   }
