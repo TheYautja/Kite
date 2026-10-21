@@ -1,6 +1,6 @@
 
 import 'package:flutter/material.dart';
-import 'package:webview_flutter/webview_flutter.dart';
+import 'package:webview_all/webview_all.dart';
 
 class Player extends StatefulWidget {
     final int id;
