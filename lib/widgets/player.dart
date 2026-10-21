@@ -25,7 +25,7 @@ class _PlayerState extends State<Player> {
 
     String get url {
         if (widget.isSeries) {
-            return 'https://vidsrc.to/embed/tv/${widget.id}/${widget.season}/${widget.episode}';
+            return 'https://vsembed.ru/embed/tv/${widget.id}/${widget.season}/${widget.episode}';
         }
 
         return 'https://vsembed.ru/embed/movie/${widget.id}/';

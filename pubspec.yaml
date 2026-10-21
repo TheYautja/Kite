@@ -1,6 +1,6 @@
 name: kiteapp
-description: "A new Flutter project."
-version: 1.0.0+1
+description: "A Flutter app to watch movies for free"
+version: 1.0.1
 
 environment:
   sdk: ^3.12.2
@@ -38,6 +38,7 @@ flutter:
   uses-material-design: true
 
   assets:
+        - assets/images/kite.png
         - assets/images/placeholder.jpg
         - .env
 

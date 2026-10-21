@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:kiteapp/widgets/bottom_nav.dart';
+import "package:kiteapp/common/common.dart";
 import "package:kiteapp/model/movie.dart";
 import "package:kiteapp/widgets/player.dart";
 import "package:kiteapp/widgets/movie_data.dart";
@@ -14,7 +15,8 @@ class MoviePlayer extends StatelessWidget {
     @override
     Widget build(BuildContext context) {
         return Scaffold(
-            appBar: AppBar(title: const Text('Watch')),
+            backgroundColor: kiteBackground,
+            appBar: AppBar(title: const Text('Watch'), backgroundColor: kiteSurface,),
             body: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
