@@ -15,7 +15,6 @@ class MoviePlayer extends StatelessWidget {
     @override
     Widget build(BuildContext context) {
         return Scaffold(
-            backgroundColor: kiteBackground,
             appBar: AppBar(title: const Text('Watch'), backgroundColor: kiteSurface,),
             body: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
