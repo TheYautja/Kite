@@ -35,13 +35,12 @@ class CardBottom extends StatelessWidget {
                                 rating: rating,
                                 colorParam: 'white',
                             ),
-                            if(movie != null)
+                            if(movie != null) ...[
                                 AddButton(movie: movie!),
-                            const Spacer(),
-                            if(movie != null){
+                                const Spacer(),
                                 PlayButton(movie: movie!),
-                                DeleteButton(movieId: movie.id!),
-                            }
+                                DeleteButton(movieId: movie!.id),
+                            ],
                             if (series != null)
                                 const Icon(
                                     Icons.tv_outlined,
