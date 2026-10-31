@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:kiteapp/model/movie.dart';
 import 'package:kiteapp/model/series.dart';
+import 'package:kiteapp/widgets/delete_button.dart';
 import 'package:kiteapp/widgets/rating.dart';
 import 'package:kiteapp/widgets/add_button.dart';
 import 'package:kiteapp/widgets/play_button.dart';
@@ -34,11 +35,13 @@ class CardBottom extends StatelessWidget {
                                 rating: rating,
                                 colorParam: 'white',
                             ),
-                            if (movie != null)
+                            if(movie != null)
                                 AddButton(movie: movie!),
                             const Spacer(),
-                            if (movie != null)
+                            if(movie != null){
                                 PlayButton(movie: movie!),
+                                DeleteButton(movieId: movie.id!),
+                            }
                             if (series != null)
                                 const Icon(
                                     Icons.tv_outlined,
